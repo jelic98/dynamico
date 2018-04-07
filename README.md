@@ -23,9 +23,9 @@ Android library for inflating dynamic layouts in runtime based on JSON configura
               	"text": "This is working!",
               	"textSize": "16sp",
               	"textColor": "#ffba00"
-          	}
-      	}
-   	]
+			}
+		}
+	]
 }
 ```
 
@@ -82,7 +82,7 @@ onlyCache(true);
 
 ## TODO
 
-* Use device hash to target target specific users
+* Use device hash to target specific users
 * Wrapper layout styling
 * Recursive view hierarchy
 
