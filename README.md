@@ -61,23 +61,23 @@ new Dynamico("http://ecloga.org/dynamico",
 * Listener for layout inflation state
 
 ```java
-	setLayoutStateListener(new LayoutStateListener() {
-		@Override
-		public void onSuccess(String message) {
-			// everything is okay
-		}
+setLayoutStateListener(new LayoutStateListener() {
+	@Override
+	public void onSuccess(String message) {
+		// everything is okay
+	}
 	
-		@Override
-    	public void onError(String message) {
-			// notify user
-		}
-	});
+	@Override
+	public void onError(String message) {
+		// notify user
+	}
+});
 ```
 
 * Force cache loading
 
 ```java
-	onlyCache(true);
+onlyCache(true);
 ```
 
 ## TODO
