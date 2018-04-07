@@ -1,10 +1,8 @@
 package org.ecloga.dynamico;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import org.ecloga.dynamico.network.ApiResponse;
 import org.ecloga.dynamico.network.Download;
 import org.json.JSONArray;
@@ -18,7 +16,7 @@ public class Dynamico {
     private ViewGroup layout;
     private Context context;
     private LayoutStateListener listener;
-    private boolean loadCache;
+    private boolean onlyCache;
 
     public Dynamico(String url, String name, ViewGroup layout) throws DynamicoException {
         if(url == null || name == null || layout == null) {
@@ -37,14 +35,14 @@ public class Dynamico {
         return this;
     }
 
-    public Dynamico onlyCache() {
-        this.loadCache = true;
+    public Dynamico onlyCache(boolean loadCache) {
+        this.onlyCache = loadCache;
 
         return this;
     }
 
     public void initialize() {
-        if(loadCache) {
+        if(onlyCache) {
             loadLayoutFromCache();
         }else {
             loadLayoutFromServer();
