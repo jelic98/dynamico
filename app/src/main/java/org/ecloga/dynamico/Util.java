@@ -45,13 +45,23 @@ public class Util {
         }
     }
 
-    public static int dpToPixels(int dp, Context context) {
+    public static int dpToPx(int dp, Context context) {
         return (int) (context.getResources().getDisplayMetrics().density * dp + 0.5f);
     }
 
-    public static int dpStringToInt(String dimension, Context context) {
-        String dp = dimension.substring(0, dimension.indexOf("dp"));
+    public static int pxToInt(String dimension, Context context) {
+        return unitToInt(dimension, "px", context);
+    }
 
-        return Util.dpToPixels(Integer.parseInt(dp), context);
+    public static int dpToInt(String dimension, Context context) {
+        return unitToInt(dimension, "dp", context);
+    }
+
+    public static int spToInt(String dimension, Context context) {
+        return unitToInt(dimension, "sp", context);
+    }
+
+    private static int unitToInt(String dimension, String unit, Context context) {
+        return Util.dpToPx(Integer.parseInt(dimension.substring(0, dimension.indexOf(unit))), context);
     }
 }

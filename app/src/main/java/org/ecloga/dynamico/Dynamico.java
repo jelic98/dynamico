@@ -11,21 +11,21 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.*;
-import java.lang.reflect.Constructor;
 
 public class Dynamico {
 
-    private String name;
+    private String url, name;
     private ViewGroup layout;
     private Context context;
     private LayoutStateListener listener;
     private boolean loadCache;
 
-    public Dynamico(String name, ViewGroup layout) throws DynamicoException {
-        if(layout == null) {
-            throw new DynamicoException("Layout cannot be null");
+    public Dynamico(String url, String name, ViewGroup layout) throws DynamicoException {
+        if(url == null || name == null || layout == null) {
+            throw new DynamicoException("Parameters cannot be null");
         }
 
+        this.url = url;
         this.name = name + ".json";
         this.layout = layout;
         this.context = layout.getContext();
@@ -54,7 +54,7 @@ public class Dynamico {
     private void loadLayoutFromServer() {
         Util.log("Dynamico", "Loading from server");
 
-        new Download(AppConfig.getApiUrl(name), AppConfig.getPath(name, context), context)
+        new Download(getApiUrl(name), getPath(name, context), context)
                 .addHandler(new ApiResponse() {
                     @Override
                     public void onSuccess(String response) {
@@ -76,7 +76,7 @@ public class Dynamico {
     private void loadLayoutFromCache() {
         Util.log("Dynamico", "Loading from cache");
 
-        File file = new File(AppConfig.getPath(name, context));
+        File file = new File(getPath(name, context));
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -129,5 +129,13 @@ public class Dynamico {
         if(listener != null) {
             listener.onSuccess(content);
         }
+    }
+
+    private String getApiUrl(String name) {
+        return this.url + "/" + name;
+    }
+
+    private String getPath(String name, Context context) {
+        return context.getFilesDir() + File.separator + name;
     }
 }

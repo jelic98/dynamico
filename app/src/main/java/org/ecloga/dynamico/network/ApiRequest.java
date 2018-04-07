@@ -1,15 +1,10 @@
 package org.ecloga.dynamico.network;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.AsyncTask;
-import android.support.v7.app.AlertDialog;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
-import org.ecloga.dynamico.AppConfig;
 import org.ecloga.dynamico.R;
 import org.ecloga.dynamico.Util;
 import org.json.JSONObject;

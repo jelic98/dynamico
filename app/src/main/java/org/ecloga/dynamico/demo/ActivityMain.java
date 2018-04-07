@@ -16,7 +16,7 @@ public class ActivityMain extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         try {
-            new Dynamico("activity_main", (ViewGroup) findViewById(R.id.mainLayout))
+            new Dynamico("http://ecloga.org/dynamico", "activity_main", (ViewGroup) findViewById(R.id.mainLayout))
                     .setLayoutStateListener(new LayoutStateListener() {
                         @Override
                         public void onSuccess(String message) {

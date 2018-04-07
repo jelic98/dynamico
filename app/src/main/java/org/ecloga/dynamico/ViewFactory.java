@@ -2,10 +2,11 @@ package org.ecloga.dynamico;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import org.json.JSONObject;
@@ -34,7 +35,7 @@ public class ViewFactory {
     }
 
     private View styleView(View view, JSONObject attributes) throws Exception {
-        Util.log("Dynamico", "Styling view " + view.getClass().toString());
+        Util.log("Dynamico", "Styling view " + view.getClass().getSimpleName());
 
         view = styleDefault(view, attributes);
 
@@ -57,7 +58,7 @@ public class ViewFactory {
             }else if(width.equalsIgnoreCase("wrap_content")) {
                 params.width = ViewGroup.LayoutParams.WRAP_CONTENT;
             }else {
-                params.height = Util.dpStringToInt(width, context);
+                params.height = Util.dpToInt(width, context);
             }
         }
 
@@ -69,12 +70,12 @@ public class ViewFactory {
             }else if(width.equalsIgnoreCase("wrap_content")) {
                 params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
             }else {
-                params.height = Util.dpStringToInt(width, context);
+                params.height = Util.dpToInt(width, context);
             }
         }
 
         if(attributes.has("layout_margin")) {
-            int margin = Util.dpStringToInt(attributes.getString("layout_margin"), context);
+            int margin = Util.dpToInt(attributes.getString("layout_margin"), context);
 
             params.setMargins(margin, margin, margin, margin);
         }else {
@@ -84,19 +85,19 @@ public class ViewFactory {
             int bottom = 0;
 
             if(attributes.has("layout_marginStart")) {
-                start = Util.dpStringToInt(attributes.getString("layout_marginStart"), context);
+                start = Util.dpToInt(attributes.getString("layout_marginStart"), context);
             }
 
             if(attributes.has("layout_marginTop")) {
-                top = Util.dpStringToInt(attributes.getString("layout_marginTop"), context);
+                top = Util.dpToInt(attributes.getString("layout_marginTop"), context);
             }
 
             if(attributes.has("layout_marginEnd")) {
-                end = Util.dpStringToInt(attributes.getString("layout_marginEnd"), context);
+                end = Util.dpToInt(attributes.getString("layout_marginEnd"), context);
             }
 
             if(attributes.has("layout_marginBottom")) {
-                bottom = Util.dpStringToInt(attributes.getString("layout_marginBottom"), context);
+                bottom = Util.dpToInt(attributes.getString("layout_marginBottom"), context);
             }
 
             params.setMargins(start, top, end, bottom);
@@ -125,7 +126,7 @@ public class ViewFactory {
         view.setLayoutParams(params);
 
         if(attributes.has("padding")) {
-            int padding = Util.dpStringToInt(attributes.getString("padding"), context);
+            int padding = Util.dpToInt(attributes.getString("padding"), context);
 
             view.setPadding(padding, padding, padding, padding);
         }else {
@@ -135,19 +136,19 @@ public class ViewFactory {
             int bottom = 0;
 
             if(attributes.has("paddingStart")) {
-                start = Util.dpStringToInt(attributes.getString("paddingStart"), context);
+                start = Util.dpToInt(attributes.getString("paddingStart"), context);
             }
 
             if(attributes.has("paddingTop")) {
-                top = Util.dpStringToInt(attributes.getString("paddingTop"), context);
+                top = Util.dpToInt(attributes.getString("paddingTop"), context);
             }
 
             if(attributes.has("paddingEnd")) {
-                end = Util.dpStringToInt(attributes.getString("paddingEnd"), context);
+                end = Util.dpToInt(attributes.getString("paddingEnd"), context);
             }
 
             if(attributes.has("paddingBottom")) {
-                bottom = Util.dpStringToInt(attributes.getString("paddingBottom"), context);
+                bottom = Util.dpToInt(attributes.getString("paddingBottom"), context);
             }
 
             view.setPadding(start, top, end, bottom);
@@ -165,8 +166,32 @@ public class ViewFactory {
             textView.setText(attributes.getString("text"));
         }
 
+        if(attributes.has("textSize")) {
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, Util.spToInt(attributes.getString("textSize"), context));
+        }
+
         if(attributes.has("textColor")) {
             textView.setTextColor(Color.parseColor(attributes.getString("textColor")));
+        }
+
+        if(attributes.has("gravity")) {
+            String gravity = attributes.getString("gravity");
+
+            if(gravity.equalsIgnoreCase("start")) {
+                textView.setGravity(Gravity.START);
+            }else if(gravity.equalsIgnoreCase("top")) {
+                textView.setGravity(Gravity.TOP);
+            }else if(gravity.equalsIgnoreCase("end")) {
+                textView.setGravity(Gravity.END);
+            }else if(gravity.equalsIgnoreCase("bottom")) {
+                textView.setGravity(Gravity.BOTTOM);
+            }else if(gravity.equalsIgnoreCase("center")) {
+                textView.setGravity(Gravity.CENTER);
+            }else if(gravity.equalsIgnoreCase("center_horizontal")) {
+                textView.setGravity(Gravity.CENTER_HORIZONTAL);
+            }else if(gravity.equalsIgnoreCase("center_vertical")) {
+                textView.setGravity(Gravity.CENTER_VERTICAL);
+            }
         }
 
         return textView;
