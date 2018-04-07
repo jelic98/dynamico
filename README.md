@@ -14,15 +14,15 @@ Android library for inflating dynamic layouts in runtime based on JSON configura
 		{
           	"class": "android.widget.TextView",
           	"attributes": {
-            	"layout_width": "match_parent",
-              	"layout_height": "wrap_content",
-             	"layout_gravity": "end",
-              	"layout_margin": "50dp",
-              	"paddingTop": "15dp",
-              	"backgroundColor": "#2980b9",
-              	"text": "This is working!",
-              	"textSize": "16sp",
-              	"textColor": "#ffba00"
+				"layout_width": "match_parent",
+				"layout_height": "wrap_content",
+				"layout_gravity": "end",
+				"layout_margin": "50dp",
+				"paddingTop": "15dp",
+				"backgroundColor": "#2980b9",
+				"text": "This is working!",
+				"textSize": "16sp",
+				"textColor": "#ffba00"
 			}
 		}
 	]
