@@ -47,15 +47,11 @@ public abstract class ApiRequest extends AsyncTask<Void, Void, String> {
             Util.log("API", url + " => " + responseCode + ": " + output);
 
             if (responseCode < 200 || responseCode > 299) {
-                if (responseCode == 401) {
-                    showUnauthenticatedDialog();
-                }else {
-                    JSONObject jsonObject = new JSONObject(output);
+                JSONObject jsonObject = new JSONObject(output);
 
-                    if (jsonObject.has("error")) {
-                        JSONObject errorObject = jsonObject.getJSONObject("error");
-                        error = errorObject.getString("message");
-                    }
+                if (jsonObject.has("error")) {
+                    JSONObject errorObject = jsonObject.getJSONObject("error");
+                    error = errorObject.getString("message");
                 }
 
                 cancel(true);
@@ -64,25 +60,6 @@ public abstract class ApiRequest extends AsyncTask<Void, Void, String> {
             error = e.getMessage();
             Util.log("API error", url + " : " + error);
         }
-    }
-
-    private void showUnauthenticatedDialog() {
-        ((Activity) context).runOnUiThread(new Runnable() {
-            public void run() {
-                if(!((Activity) context).isFinishing()) {
-                    new AlertDialog.Builder(context)
-                            .setTitle(R.string.caption_error)
-                            .setMessage(R.string.error_unauthenticated)
-                            .setIcon(android.R.drawable.ic_dialog_info)
-                            .setCancelable(false)
-                            .setPositiveButton(R.string.action_ok, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int whichButton) {
-                                    handle();
-                                }})
-                            .show();
-                }
-            }
-        });
     }
 
     @Override
@@ -145,7 +122,6 @@ public abstract class ApiRequest extends AsyncTask<Void, Void, String> {
     private Request.Builder requestBuilder() {
         return new Request.Builder()
                 .url(url)
-                .addHeader("Accept", "application/json")
-                .addHeader("Authorization", "Bearer " + AppConfig.API_KEY);
+                .addHeader("Accept", "application/json");
     }
 }

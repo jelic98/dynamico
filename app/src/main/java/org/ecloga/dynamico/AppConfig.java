@@ -7,8 +7,8 @@ import java.io.File;
 
 public class AppConfig {
 
+    // todo Move API_URL to Dynamico.java and let user to configure it
     public static final String API_URL = "http://ecloga.org/dynamico";
-    public static final String API_KEY = "RANDOM_API_KEY";
 
     public static String getApiUrl(String url) {
         return API_URL + "/" + url;

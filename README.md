@@ -16,12 +16,12 @@ Android library for inflating dynamic layouts in runtime based on JSON configura
 
             @Override
             public void onError(String message) {
-            	// notify user and load layout from storage if it exists
+            	// notify user
             }
 		})
         .initialize();
 ```
 
-### Work in progress
+## Work in progress
 
 Still pretty fresh. Stay tuned!

@@ -25,7 +25,7 @@ public class ActivityMain extends AppCompatActivity {
 
                         @Override
                         public void onError(String message) {
-                            // notify user and load layout from storage if it exists
+                            // notify user
                         }
                     })
                     .initialize();
