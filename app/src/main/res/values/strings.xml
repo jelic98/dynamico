@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Dynamico</string>
+
+    <string name="caption_error">Error</string>
+
+    <string name="error_unauthenticated">Not authenticated. Check your API_KEY.</string>
+    <string name="error_disconnected">No internet connection.</string>
+
+    <string name="action_ok">OK</string>
+    <string name="action_yes">Yes</string>
+    <string name="action_no">No</string>
+</resources>
