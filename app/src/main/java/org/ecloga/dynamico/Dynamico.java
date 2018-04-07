@@ -1,12 +1,9 @@
 package org.ecloga.dynamico;
 
 import android.content.Context;
-import android.view.View;
 import android.view.ViewGroup;
 import org.ecloga.dynamico.network.ApiResponse;
 import org.ecloga.dynamico.network.Download;
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.*;
 
@@ -56,11 +53,13 @@ public class Dynamico {
                 .addHandler(new ApiResponse() {
                     @Override
                     public void onSuccess(String response) {
-                        addLayout(response);
+                        addViews(response);
                     }
 
                     @Override
                     public void onError(String message) {
+                        Util.log("Server error", message);
+
                         loadLayoutFromCache();
 
                         if(listener != null) {
@@ -86,46 +85,33 @@ public class Dynamico {
                 content.append(line);
             }
 
-            addLayout(content.toString());
+            addViews(content.toString());
 
             reader.close();
         }catch(IOException e) {
             Util.log("File error", e.getMessage());
+
             loadLayoutFromServer();
+
+            if(listener != null) {
+                listener.onError(e.getMessage());
+            }
         }
     }
 
-    private void addLayout(String content) {
-        ViewFactory factory = new ViewFactory(context);
-
+    private void addViews(String content) {
         try {
-            JSONObject obj = new JSONObject(content);
+            new ViewFactory(context).addViews(layout, new JSONObject(content));
 
-            layout.removeAllViews();
-
-            if(obj.has("views")) {
-                JSONArray views = obj.getJSONArray("views");
-
-                for(int i = 0; i < views.length(); i++) {
-                    View view;
-
-                    try {
-                        view = factory.getView(views.getJSONObject(i));
-                    }catch(Exception e) {
-                        e.printStackTrace();
-                        Util.log("View error", "Caused by JSON object at index " + i + "\nDetails: " + e.getMessage());
-                        continue;
-                    }
-
-                    layout.addView(view);
-                }
+            if(listener != null) {
+                listener.onSuccess(content);
             }
-        }catch(JSONException e) {
-            Util.log("JSON error", e.getMessage());
-        }
+        }catch(Exception e) {
+            Util.log("Layout error", e.getMessage());
 
-        if(listener != null) {
-            listener.onSuccess(content);
+            if(listener != null) {
+                listener.onError(content);
+            }
         }
     }
 

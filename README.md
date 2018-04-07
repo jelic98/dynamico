@@ -83,7 +83,6 @@ onlyCache(true);
 ## TODO
 
 * Use device hash to target specific users
-* Wrapper layout styling
-* Recursive view hierarchy
+* ViewGroup styling - LayoutParams
 
 ### Still pretty fresh. Stay tuned!

@@ -6,9 +6,9 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import java.lang.reflect.Constructor;
 
@@ -20,8 +20,35 @@ public class ViewFactory {
         this.context = context;
     }
 
-    public View getView(JSONObject object) throws Exception {
-        return styleView(createView(object.getString("class")), object.getJSONObject("attributes"));
+    public View addViews(ViewGroup layout, JSONObject object) throws Exception {
+        Util.log("Dynamico", "Adding children for view " + layout.getClass().getSimpleName());
+
+        JSONArray views = object.getJSONArray("views");
+
+        for(int i = 0; i < views.length(); i++) {
+            try {
+                layout.addView(getView(views.getJSONObject(i)));
+            }catch(Exception e) {
+                e.printStackTrace();
+                Util.log("View error", "Caused by JSON object at index " + i + "\nDetails: " + e.getMessage());
+            }
+        }
+
+        return layout;
+    }
+
+    private View getView(JSONObject object) throws Exception {
+        View view = createView(object.getString("class"));
+
+        if(object.has("views")) {
+            view = addViews((ViewGroup) view, object);
+        }
+
+        if(object.has("attributes")) {
+            view = styleView(view, object.getJSONObject("attributes"));
+        }
+
+        return view;
     }
 
     private View createView(String className) throws Exception {
@@ -154,7 +181,9 @@ public class ViewFactory {
             view.setPadding(start, top, end, bottom);
         }
 
-        view.setBackgroundColor(Color.parseColor(attributes.getString("backgroundColor")));
+        if(attributes.has("backgroundColor")) {
+            view.setBackgroundColor(Color.parseColor(attributes.getString("backgroundColor")));
+        }
 
         return view;
     }
