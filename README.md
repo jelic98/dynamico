@@ -83,6 +83,5 @@ onlyCache(true);
 ## TODO
 
 * Use device hash to target specific users
-* ViewGroup styling - LayoutParams
 
 ### Still pretty fresh. Stay tuned!

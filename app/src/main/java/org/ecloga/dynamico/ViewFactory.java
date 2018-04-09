@@ -68,6 +68,8 @@ public class ViewFactory {
 
         if(view instanceof TextView) {
             view = styleTextView(view, attributes);
+        }else if(view instanceof LinearLayout) {
+            view = styleLinearLayout(view, attributes);
         }
 
         return view;
@@ -181,11 +183,39 @@ public class ViewFactory {
             view.setPadding(start, top, end, bottom);
         }
 
+        if(attributes.has("visibility")) {
+            String visibility = attributes.getString("visibility");
+
+            if(visibility.equalsIgnoreCase("visible")) {
+                view.setVisibility(View.VISIBLE);
+            }else if(visibility.equalsIgnoreCase("invisible")) {
+                view.setVisibility(View.INVISIBLE);
+            }else if(visibility.equalsIgnoreCase("gone")) {
+                view.setVisibility(View.GONE);
+            }
+        }
+
         if(attributes.has("backgroundColor")) {
             view.setBackgroundColor(Color.parseColor(attributes.getString("backgroundColor")));
         }
 
         return view;
+    }
+
+    private View styleLinearLayout(View view, JSONObject attributes) throws Exception {
+        LinearLayout linearLayout = (LinearLayout) view;
+
+        if(attributes.has("orientation")) {
+            String orientation = attributes.getString("orientation");
+
+            if(orientation.equalsIgnoreCase("vertical")) {
+                linearLayout.setOrientation(LinearLayout.VERTICAL);
+            }else if(orientation.equalsIgnoreCase("horizontal")) {
+                linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+            }
+        }
+
+        return linearLayout;
     }
 
     private View styleTextView(View view, JSONObject attributes) throws Exception {
