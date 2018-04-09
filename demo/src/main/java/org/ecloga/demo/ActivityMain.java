@@ -1,12 +1,12 @@
-package org.ecloga.dynamico.demo;
+package org.ecloga.demo;
 
 import android.os.Bundle;
-import android.view.ViewGroup;
-import org.ecloga.dynamico.DynamicoException;
-import org.ecloga.dynamico.R;
-import org.ecloga.dynamico.Dynamico;
-import org.ecloga.dynamico.LayoutStateListener;
 import android.support.v7.app.AppCompatActivity;
+import android.view.ViewGroup;
+import org.ecloga.dynamico.Dynamico;
+import org.ecloga.dynamico.DynamicoException;
+import org.ecloga.dynamico.LayoutStateListener;
+import org.ecloga.dynamico.R;
 
 public class ActivityMain extends AppCompatActivity {
 

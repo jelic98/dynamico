@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Dynamico</string>
+    <string name="lib_name">Dynamico</string>
 
     <string name="caption_error">Error</string>
 
