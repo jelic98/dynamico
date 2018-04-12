@@ -3,7 +3,7 @@ package org.ecloga.dynamico;
 import android.content.Context;
 import android.view.ViewGroup;
 import org.ecloga.dynamico.network.ApiResponse;
-import org.ecloga.dynamico.network.Download;
+import org.ecloga.dynamico.network.FileDownload;
 import org.json.JSONObject;
 import java.io.*;
 
@@ -49,7 +49,7 @@ public class Dynamico {
     private void loadLayoutFromServer() {
         Util.log("Dynamico", "Loading from server");
 
-        new Download(getApiUrl(name), getPath(name, context), context)
+        new FileDownload(getApiUrl(name), context, getPath(name, context))
                 .addHandler(new ApiResponse() {
                     @Override
                     public void onSuccess(String response) {
@@ -67,7 +67,7 @@ public class Dynamico {
                         }
                     }
                 })
-                .send();
+                .start();
     }
 
     private void loadLayoutFromCache() {

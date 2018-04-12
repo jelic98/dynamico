@@ -5,16 +5,21 @@ import android.os.AsyncTask;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
+import org.apache.commons.io.IOUtils;
 import org.ecloga.dynamico.R;
 import org.ecloga.dynamico.Util;
 import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 public abstract class ApiRequest extends AsyncTask<Void, Void, String> {
 
-    protected String url, output, error;
+    protected byte[] responseBytes;
+    protected String url, output, error, type;
     protected Context context;
-    protected Response response;
 
     private OkHttpClient client;
     private ApiResponse handler;
@@ -25,6 +30,8 @@ public abstract class ApiRequest extends AsyncTask<Void, Void, String> {
                 .readTimeout(3, TimeUnit.MINUTES)
                 .writeTimeout(3, TimeUnit.MINUTES)
                 .build();
+
+        type = "application/json";
     }
 
     protected void executeRequest() {
@@ -33,9 +40,11 @@ public abstract class ApiRequest extends AsyncTask<Void, Void, String> {
         request = requestBuilder().get().build();
 
         try {
-            response = client.newCall(request).execute();
+            Response response = client.newCall(request).execute();
 
-            output = response.body().string();
+            responseBytes = IOUtils.toByteArray(response.body().byteStream());
+
+            output = new String(responseBytes);
 
             int responseCode = response.code();
 
@@ -51,7 +60,7 @@ public abstract class ApiRequest extends AsyncTask<Void, Void, String> {
 
                 cancel(true);
             }
-        } catch (Exception e) {
+        }catch(Exception e) {
             error = e.getMessage();
             Util.log("API error", url + " : " + error);
         }
@@ -100,7 +109,7 @@ public abstract class ApiRequest extends AsyncTask<Void, Void, String> {
         return this;
     }
 
-    public void send() {
+    public void start() {
         executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
@@ -117,6 +126,14 @@ public abstract class ApiRequest extends AsyncTask<Void, Void, String> {
     private Request.Builder requestBuilder() {
         return new Request.Builder()
                 .url(url)
-                .addHeader("Accept", "application/json");
+                .addHeader("Accept", getType());
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

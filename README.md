@@ -104,5 +104,6 @@ onlyCache(true);
 ## TODO
 
 * Use device hash to target specific users
+* Cache ImageView source images
 
 ### Still pretty fresh. Stay tuned!
