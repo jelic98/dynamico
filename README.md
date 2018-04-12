@@ -45,12 +45,20 @@ Android library for inflating dynamic layouts in runtime based on JSON configura
 				"textSize": "16sp",
 				"textColor": "#ffba00"
 			}
+		},
+		{
+			"class": "android.widget.ImageView",
+			"attributes": {
+				"layout_width": "wrap_content",
+				"layout_height": "wrap_content",
+				"src": "http://ecloga.org/dynamico/logo.png"
+			}
 		}
 	]
 }
 ```
 
-2. Create XML layout
+2. Create XML layout that will wrap around downloaded layout
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
