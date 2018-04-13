@@ -19,6 +19,10 @@ public class ImageDownload extends Download {
         imageBytes = responseBytes.clone();
     }
 
+    public byte[] getBytes() {
+        return imageBytes;
+    }
+
     public Bitmap getBitmap() {
         return BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
     }

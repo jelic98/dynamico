@@ -13,7 +13,7 @@ public class Dynamico {
     private ViewGroup layout;
     private Context context;
     private LayoutStateListener listener;
-    private boolean onlyCache;
+    private boolean onlyCache, cacheImages;
 
     public Dynamico(String url, String name, ViewGroup layout) throws DynamicoException {
         if(url == null || name == null || layout == null) {
@@ -32,8 +32,14 @@ public class Dynamico {
         return this;
     }
 
-    public Dynamico onlyCache(boolean loadCache) {
-        this.onlyCache = loadCache;
+    public Dynamico onlyCache(boolean onlyCache) {
+        this.onlyCache = onlyCache;
+
+        return this;
+    }
+
+    public Dynamico cacheImages(boolean cacheImages) {
+        this.cacheImages = cacheImages;
 
         return this;
     }

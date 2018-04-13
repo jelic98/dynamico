@@ -10,9 +10,6 @@ import org.apache.commons.io.IOUtils;
 import org.ecloga.dynamico.R;
 import org.ecloga.dynamico.Util;
 import org.json.JSONObject;
-
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 public abstract class ApiRequest extends AsyncTask<Void, Void, String> {
