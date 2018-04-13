@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import org.ecloga.dynamico.Util;
 import org.json.JSONObject;
@@ -136,6 +137,58 @@ public class DefaultStyler implements Styler {
             }else if(visibility.equalsIgnoreCase("gone")) {
                 view.setVisibility(View.GONE);
             }
+        }
+
+        if(attributes.has("alpha")) {
+            view.setAlpha((float) attributes.getDouble("alpha"));
+        }
+
+        if(attributes.has("rotation")) {
+            view.setRotation((float) attributes.getDouble("rotation"));
+        }
+
+        if(attributes.has("rotationX")) {
+            view.setRotationX((float) attributes.getDouble("rotationX"));
+        }
+
+        if(attributes.has("rotationY")) {
+            view.setRotationY((float) attributes.getDouble("rotationY"));
+        }
+
+        if(attributes.has("translationX")) {
+            view.setTranslationX((float) attributes.getDouble("translationX"));
+        }
+
+        if(attributes.has("translationY")) {
+            view.setTranslationY((float) attributes.getDouble("translationY"));
+        }
+
+        if(attributes.has("scaleX")) {
+            view.setScaleX((float) attributes.getDouble("scaleX"));
+        }
+
+        if(attributes.has("scaleY")) {
+            view.setScaleY((float) attributes.getDouble("scaleY"));
+        }
+
+        if(attributes.has("pivotX")) {
+            view.setPivotX((float) attributes.getDouble("pivotX"));
+        }
+
+        if(attributes.has("pivotY")) {
+            view.setPivotY((float) attributes.getDouble("pivotY"));
+        }
+
+        if(attributes.has("x")) {
+            view.setX((float) attributes.getDouble("x"));
+        }
+
+        if(attributes.has("y")) {
+            view.setY((float) attributes.getDouble("y"));
+        }
+
+        if(attributes.has("clickable")) {
+            view.setClickable(attributes.getBoolean("clickable"));
         }
 
         if(attributes.has("backgroundColor")) {

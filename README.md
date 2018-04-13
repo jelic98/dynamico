@@ -111,6 +111,9 @@ onlyCache(true);
 
 ## TODO
 
-* Use device hash to target specific users
+* Use device hash/brand/model to target specific users
+* Make ordinary click listener actions like finish activity, start a new one etc.
+* Make interface for custom click listeners
+* Use configuration fields to modify layout
 
 ### Still pretty fresh. Stay tuned!

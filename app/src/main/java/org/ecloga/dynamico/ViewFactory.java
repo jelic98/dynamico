@@ -30,7 +30,6 @@ public class ViewFactory {
             try {
                 layout.addView(getView(views.getJSONObject(i)));
             }catch(Exception e) {
-                e.printStackTrace();
                 Util.log("View error", "Caused by JSON object at index " + i + "\nDetails: " + e.getMessage());
             }
         }
