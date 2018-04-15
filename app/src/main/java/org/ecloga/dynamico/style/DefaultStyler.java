@@ -247,10 +247,10 @@ public class DefaultStyler implements Styler {
         if(attributes.has("conditions")) {
             View conditionView = view;
 
-            JSONArray targets = attributes.getJSONArray("conditions");
+            JSONArray conditions = attributes.getJSONArray("conditions");
 
-            for(int i = 0; i < targets.length(); i++) {
-                JSONObject condition = targets.getJSONObject(i);
+            for(int i = 0; i < conditions.length(); i++) {
+                JSONObject condition = conditions.getJSONObject(i);
 
                 Class config = Class.forName(condition.getString("class"));
                 String value = config.getDeclaredField(condition.getString("field")).get(config).toString();

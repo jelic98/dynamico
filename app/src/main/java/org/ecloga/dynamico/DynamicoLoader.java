@@ -96,10 +96,10 @@ public class DynamicoLoader {
                 for(int i = 0; i < targets.length(); i++) {
                     JSONObject target = targets.getJSONObject(i);
 
-                    if(target.has("targetValue")) {
-                        String targetValue = target.getString("targetValue");
+                    if(target.has("value")) {
+                        String targetValue = target.getString("value");
 
-                        if(targetValue.equalsIgnoreCase(Device.getInfo(targetKey))) {
+                        if(targetValue.equalsIgnoreCase(Device.getInfo(Device.Key.valueOf(targetKey)))) {
                             new ViewFactory(context).addViews(layout, target);
 
                             foundLayout = true;
@@ -109,8 +109,8 @@ public class DynamicoLoader {
                     }
                 }
 
-                if(!foundLayout) {
-                    new ViewFactory(context).addViews(layout, obj.getJSONObject("targetDefault"));
+                if(!foundLayout && obj.has("default")) {
+                    new ViewFactory(context).addViews(layout, obj.getJSONObject("default"));
                 }
             }else {
                 new ViewFactory(context).addViews(layout, obj);

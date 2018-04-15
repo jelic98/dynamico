@@ -29,6 +29,8 @@ public class Dynamico {
     }
 
     public void initialize() {
+        Util.log("Dynamico", "Device information: " + Device.getAllInfo());
+
         if(options.isEnabled(DynamicoOptions.Option.ONLY_CACHE)) {
             loader.loadLayoutFromCache();
         }else {
