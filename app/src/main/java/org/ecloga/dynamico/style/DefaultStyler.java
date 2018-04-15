@@ -226,12 +226,12 @@ public class DefaultStyler implements Styler {
                 request.addHandler(new ApiResponse() {
                     @Override
                     public void onSuccess(String response) {
-                        view.setBackground(RoundedBitmapDrawableFactory.create(context.getResources(), request.getBitmap()));
+                        view.setBackground(request.getDrawable());
                     }
 
                     @Override
                     public void onError(String message) {
-                        Util.log("Image error", message);
+                        Util.log("Image error", "Setting image as a background produced the following error: " + message);
                     }
                 });
                 request.start();

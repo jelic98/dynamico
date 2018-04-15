@@ -2,6 +2,7 @@ package org.ecloga.dynamico.style;
 
 import android.content.Context;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.view.View;
 import android.widget.ImageView;
 import org.apache.commons.io.FileUtils;
@@ -10,13 +11,12 @@ import org.ecloga.dynamico.ViewFactory;
 import org.ecloga.dynamico.network.ApiResponse;
 import org.ecloga.dynamico.network.ImageDownload;
 import org.json.JSONObject;
-
 import java.io.File;
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
 
 public class ImageViewStyler extends DefaultStyler {
+
+    private static final String TAG = "Dynamico.ImageViewStyler";
 
     private boolean cache;
 
@@ -36,6 +36,8 @@ public class ImageViewStyler extends DefaultStyler {
 
         if(attributes.has("src")) {
             String src = attributes.getString("src");
+
+            imageView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 
             if(cache) {
                 loadImageFromCache(imageView, src);
@@ -60,20 +62,20 @@ public class ImageViewStyler extends DefaultStyler {
         request.addHandler(new ApiResponse() {
             @Override
             public void onSuccess(String response) {
-                imageView.setImageBitmap(request.getBitmap());
-
                 if(cache) {
                     try {
                         FileUtils.writeByteArrayToFile(createFile(src), request.getBytes());
                     }catch(Exception e) {
-                        Util.log("Image error", e.getMessage());
+                        Util.log("Image error", "Loading image from server and caching it produced the following error: " + e.getMessage());
                     }
                 }
+
+                imageView.setImageDrawable(request.getDrawable());
             }
 
             @Override
             public void onError(String message) {
-                Util.log("Image error", message);
+                Util.log("Image error", "Loading image from server produced the following error: " + message);
 
                 loadImageFromCache(imageView, src);
             }
@@ -87,7 +89,7 @@ public class ImageViewStyler extends DefaultStyler {
         try {
             bytes = FileUtils.readFileToByteArray(createFile(src));
         }catch(Exception e) {
-            Util.log("Image error", e.getMessage());
+            Util.log("Image error", "Loading image from cache produced the following error: " + e.getMessage());
 
             loadImageFromServer(imageView, src);
 
@@ -95,18 +97,19 @@ public class ImageViewStyler extends DefaultStyler {
         }
 
         if(bytes != null && bytes.length > 0) {
-            imageView.setImageBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
+            imageView.setImageDrawable(new BitmapDrawable(context.getResources(),
+                    BitmapFactory.decodeByteArray(bytes, 0, bytes.length)));
         }else {
             loadImageFromServer(imageView, src);
         }
     }
 
     private File createFile(String src) throws Exception {
-        MessageDigest digest = MessageDigest.getInstance("SHA-256");
-        byte[] hash = digest.digest(src.getBytes(StandardCharsets.UTF_8));
-        String path = new String(hash);
+        String path = context.getFilesDir() + File.separator + Util.hash(src.getBytes(StandardCharsets.UTF_8));
 
-        File file = new File(context.getFilesDir() + File.separator + path);
+        Util.log(TAG, "Creating file at path: " + path);
+
+        File file = new File(path);
         file.createNewFile();
 
         return file;

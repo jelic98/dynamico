@@ -1,29 +1,30 @@
 package org.ecloga.dynamico.network;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 
 public class ImageDownload extends Download {
 
-    private byte[] imageBytes;
+    private byte[] bytes;
 
     public ImageDownload(String url, Context context) {
         super(url, context);
 
-        setType("image/png");
+        setType("image/*");
     }
 
     @Override
     public void onResponse() {
-        imageBytes = responseBytes.clone();
+        bytes = responseBytes.clone();
     }
 
     public byte[] getBytes() {
-        return imageBytes;
+        return bytes;
     }
 
-    public Bitmap getBitmap() {
-        return BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+    public Drawable getDrawable() {
+        return new BitmapDrawable(context.getResources(), BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
     }
 }

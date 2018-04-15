@@ -15,6 +15,8 @@ import org.ecloga.dynamico.style.*;
 
 public class ViewFactory {
 
+    private static final String TAG = "Dynamico.ViewFactory";
+
     private Context context;
 
     public ViewFactory(Context context) {
@@ -22,7 +24,7 @@ public class ViewFactory {
     }
 
     public View addViews(ViewGroup layout, JSONObject object) throws Exception {
-        Util.log("Dynamico", "Adding children for view " + layout.getClass().getSimpleName());
+        Util.log(TAG, "Adding children for view " + layout.getClass().getSimpleName());
 
         JSONArray views = object.getJSONArray("views");
 
@@ -52,7 +54,7 @@ public class ViewFactory {
     }
 
     private View createView(String className) throws Exception {
-        Util.log("Dynamico", "Creating view " + className);
+        Util.log(TAG, "Creating view " + className);
 
         Class elementClass = Class.forName(className);
 
@@ -62,7 +64,7 @@ public class ViewFactory {
     }
 
     public View styleView(View view, JSONObject attributes) throws Exception {
-        Util.log("Dynamico", "Styling view " + view.getClass().getSimpleName());
+        Util.log(TAG, "Styling view " + view.getClass().getSimpleName());
 
         if(view instanceof TextView) {
             view = new TextViewStyler(this, context).style(view, attributes);

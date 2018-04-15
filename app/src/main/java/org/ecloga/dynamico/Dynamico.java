@@ -4,6 +4,8 @@ import android.view.ViewGroup;
 
 public class Dynamico {
 
+    private static final String TAG = "Dynamico";
+
     private DynamicoLoader loader;
     private DynamicoOptions options;
 
@@ -29,7 +31,7 @@ public class Dynamico {
     }
 
     public void initialize() {
-        Util.log("Dynamico", "Device information: " + Device.getAllInfo());
+        Util.log(TAG, "Device information: " + Device.getAllInfo());
 
         if(options.isEnabled(DynamicoOptions.Option.ONLY_CACHE)) {
             loader.loadLayoutFromCache();

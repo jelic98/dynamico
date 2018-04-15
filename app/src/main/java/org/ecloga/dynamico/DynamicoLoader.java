@@ -13,6 +13,8 @@ import java.io.IOException;
 
 public class DynamicoLoader {
 
+    private static final String TAG = "Dynamico.DynamicoLoader";
+
     private String url, name;
     private ViewGroup layout;
     private Context context;
@@ -30,7 +32,7 @@ public class DynamicoLoader {
     }
 
     public void loadLayoutFromServer() {
-        Util.log("DynamicoLoader", "Loading from server");
+        Util.log(TAG, "Loading from server");
 
         new FileDownload(getDirectoryUrl(name), context, getStoragePath(name, context))
                 .addHandler(new ApiResponse() {
@@ -54,7 +56,7 @@ public class DynamicoLoader {
     }
 
     public void loadLayoutFromCache() {
-        Util.log("DynamicoLoader", "Loading from cache");
+        Util.log(TAG, "Loading from cache");
 
         File file = new File(getStoragePath(name, context));
 
@@ -72,7 +74,7 @@ public class DynamicoLoader {
 
             reader.close();
         }catch(IOException e) {
-            Util.log("File error", e.getMessage());
+            Util.log("File error", "Loading layout from cache produced the following error: " + e.getMessage());
 
             loadLayoutFromServer();
 
@@ -86,9 +88,7 @@ public class DynamicoLoader {
         try {
             JSONObject obj = new JSONObject(content);
 
-            if(obj.has("targetKey")) {
-                String targetKey = obj.getString("targetKey");
-
+            if(obj.has("targets")) {
                 JSONArray targets = obj.getJSONArray("targets");
 
                 boolean foundLayout = false;
@@ -96,16 +96,15 @@ public class DynamicoLoader {
                 for(int i = 0; i < targets.length(); i++) {
                     JSONObject target = targets.getJSONObject(i);
 
-                    if(target.has("value")) {
-                        String targetValue = target.getString("value");
+                    String targetKey = target.getString("key");
+                    String targetValue = target.getString("value");
 
-                        if(targetValue.equalsIgnoreCase(Device.getInfo(Device.Key.valueOf(targetKey)))) {
-                            new ViewFactory(context).addViews(layout, target);
+                    if(targetValue.equalsIgnoreCase(Device.getInfo(Device.Key.valueOf(targetKey)))) {
+                        new ViewFactory(context).addViews(layout, target);
 
-                            foundLayout = true;
+                        foundLayout = true;
 
-                            break;
-                        }
+                        break;
                     }
                 }
 

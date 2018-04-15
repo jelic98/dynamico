@@ -111,7 +111,6 @@ setOptions(CACHE_ONLY)
 
 ## TODO
 
-* Support vector drawables
 * Add click listeners
 * Add detailed usage and more examples in README
 
