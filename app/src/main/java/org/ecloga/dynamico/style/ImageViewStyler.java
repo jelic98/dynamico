@@ -47,7 +47,7 @@ public class ImageViewStyler extends DefaultStyler {
             try {
                 imageView.setScaleType(ImageView.ScaleType.valueOf(attributes.getString("scaleType").trim()));
             }catch(IllegalArgumentException e) {
-                Util.log("Image error", e.getMessage());
+                Util.log("Style error", e.getMessage());
             }
         }
 

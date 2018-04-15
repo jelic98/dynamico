@@ -40,7 +40,7 @@ Android library for inflating dynamic layouts in runtime based on JSON configura
 				"layout_height": "wrap_content",
 				"layout_margin": "50dp",
 				"paddingTop": "15dp",
-				"backgroundColor": "#2980b9",
+				"background": "#2980b9",
 				"text": "This is working!",
 				"textSize": "16sp",
 				"textColor": "#ffba00"
@@ -103,15 +103,15 @@ setLayoutStateListener(new LayoutStateListener() {
 });
 ```
 
-* Force cache loading
+* Force loading from cache (skip layout fetching from server)
 
 ```java
-onlyCache(true);
+setOptions(CACHE_ONLY)
 ```
 
 ## TODO
 
-* Use device hash/brand/model to target specific users
+* Support vector drawables
 * Make ordinary click listener actions like finish activity, start a new one etc.
 * Make interface for custom click listeners
 * Use configuration fields to modify layout

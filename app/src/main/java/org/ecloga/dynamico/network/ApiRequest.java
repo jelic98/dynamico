@@ -14,6 +14,8 @@ import java.util.concurrent.TimeUnit;
 
 public abstract class ApiRequest extends AsyncTask<Void, Void, String> {
 
+    private static final String ERROR_DISCONNECTED = "No internet connection";
+
     protected byte[] responseBytes;
     protected String url, output, error, type;
     protected Context context;
@@ -70,7 +72,7 @@ public abstract class ApiRequest extends AsyncTask<Void, Void, String> {
         Util.blockTouches(context);
 
         if(!Util.hasNetworkAccess(context)) {
-            error = context.getResources().getString(R.string.error_disconnected);
+            error = ERROR_DISCONNECTED;
             cancel(true);
         }
     }

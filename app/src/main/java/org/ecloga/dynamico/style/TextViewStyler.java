@@ -26,11 +26,15 @@ public class TextViewStyler extends DefaultStyler {
         }
 
         if(attributes.has("textSize")) {
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, Util.spToInt(attributes.getString("textSize"), context));
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, Util.unitToPx(attributes.getString("textSize"), context));
         }
 
         if(attributes.has("textColor")) {
-            textView.setTextColor(Color.parseColor(attributes.getString("textColor")));
+            try {
+                textView.setTextColor(Color.parseColor(attributes.getString("textColor")));
+            }catch(IllegalArgumentException e) {
+                Util.log("Style error", e.getMessage());
+            }
         }
 
         if(attributes.has("gravity")) {

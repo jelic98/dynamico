@@ -1,6 +1,6 @@
 package org.ecloga.dynamico;
 
-public abstract class LayoutStateListener {
+public abstract class DynamicoListener {
 
     public abstract void onSuccess(String message);
 

@@ -5,8 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.ViewGroup;
 import org.ecloga.dynamico.Dynamico;
 import org.ecloga.dynamico.DynamicoException;
-import org.ecloga.dynamico.LayoutStateListener;
-import org.ecloga.dynamico.R;
+import org.ecloga.dynamico.DynamicoListener;
 
 public class ActivityMain extends AppCompatActivity {
 
@@ -17,7 +16,7 @@ public class ActivityMain extends AppCompatActivity {
 
         try {
             new Dynamico("http://ecloga.org/dynamico", "activity_main", (ViewGroup) findViewById(R.id.mainLayout))
-                    .setLayoutStateListener(new LayoutStateListener() {
+                    .setListener(new DynamicoListener() {
                         @Override
                         public void onSuccess(String message) {
                             // everything is okay

@@ -2,12 +2,14 @@ package org.ecloga.dynamico.style;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import org.ecloga.dynamico.Util;
+import org.ecloga.dynamico.network.ApiResponse;
+import org.ecloga.dynamico.network.ImageDownload;
 import org.json.JSONObject;
 
 public class DefaultStyler implements Styler {
@@ -19,7 +21,7 @@ public class DefaultStyler implements Styler {
     }
 
     @Override
-    public View style(View view, JSONObject attributes) throws Exception {
+    public View style(final View view, JSONObject attributes) throws Exception {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
@@ -31,7 +33,7 @@ public class DefaultStyler implements Styler {
             }else if(width.equalsIgnoreCase("wrap_content")) {
                 params.width = ViewGroup.LayoutParams.WRAP_CONTENT;
             }else {
-                params.height = Util.dpToInt(width, context);
+                params.height = Util.unitToPx(width, context);
             }
         }
 
@@ -43,12 +45,12 @@ public class DefaultStyler implements Styler {
             }else if(width.equalsIgnoreCase("wrap_content")) {
                 params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
             }else {
-                params.height = Util.dpToInt(width, context);
+                params.height = Util.unitToPx(width, context);
             }
         }
 
         if(attributes.has("layout_margin")) {
-            int margin = Util.dpToInt(attributes.getString("layout_margin"), context);
+            int margin = Util.unitToPx(attributes.getString("layout_margin"), context);
 
             params.setMargins(margin, margin, margin, margin);
         }else {
@@ -58,19 +60,19 @@ public class DefaultStyler implements Styler {
             int bottom = 0;
 
             if(attributes.has("layout_marginStart")) {
-                start = Util.dpToInt(attributes.getString("layout_marginStart"), context);
+                start = Util.unitToPx(attributes.getString("layout_marginStart"), context);
             }
 
             if(attributes.has("layout_marginTop")) {
-                top = Util.dpToInt(attributes.getString("layout_marginTop"), context);
+                top = Util.unitToPx(attributes.getString("layout_marginTop"), context);
             }
 
             if(attributes.has("layout_marginEnd")) {
-                end = Util.dpToInt(attributes.getString("layout_marginEnd"), context);
+                end = Util.unitToPx(attributes.getString("layout_marginEnd"), context);
             }
 
             if(attributes.has("layout_marginBottom")) {
-                bottom = Util.dpToInt(attributes.getString("layout_marginBottom"), context);
+                bottom = Util.unitToPx(attributes.getString("layout_marginBottom"), context);
             }
 
             params.setMargins(start, top, end, bottom);
@@ -99,7 +101,7 @@ public class DefaultStyler implements Styler {
         view.setLayoutParams(params);
 
         if(attributes.has("padding")) {
-            int padding = Util.dpToInt(attributes.getString("padding"), context);
+            int padding = Util.unitToPx(attributes.getString("padding"), context);
 
             view.setPadding(padding, padding, padding, padding);
         }else {
@@ -109,19 +111,19 @@ public class DefaultStyler implements Styler {
             int bottom = 0;
 
             if(attributes.has("paddingStart")) {
-                start = Util.dpToInt(attributes.getString("paddingStart"), context);
+                start = Util.unitToPx(attributes.getString("paddingStart"), context);
             }
 
             if(attributes.has("paddingTop")) {
-                top = Util.dpToInt(attributes.getString("paddingTop"), context);
+                top = Util.unitToPx(attributes.getString("paddingTop"), context);
             }
 
             if(attributes.has("paddingEnd")) {
-                end = Util.dpToInt(attributes.getString("paddingEnd"), context);
+                end = Util.unitToPx(attributes.getString("paddingEnd"), context);
             }
 
             if(attributes.has("paddingBottom")) {
-                bottom = Util.dpToInt(attributes.getString("paddingBottom"), context);
+                bottom = Util.unitToPx(attributes.getString("paddingBottom"), context);
             }
 
             view.setPadding(start, top, end, bottom);
@@ -191,8 +193,30 @@ public class DefaultStyler implements Styler {
             view.setClickable(attributes.getBoolean("clickable"));
         }
 
-        if(attributes.has("backgroundColor")) {
-            view.setBackgroundColor(Color.parseColor(attributes.getString("backgroundColor")));
+        if(attributes.has("background")) {
+            String background = attributes.getString("background");
+
+            if(Util.isValidURL(background)) {
+                final ImageDownload request = new ImageDownload(background, context);
+                request.addHandler(new ApiResponse() {
+                    @Override
+                    public void onSuccess(String response) {
+                        view.setBackground(RoundedBitmapDrawableFactory.create(context.getResources(), request.getBitmap()));
+                    }
+
+                    @Override
+                    public void onError(String message) {
+                        Util.log("Image error", message);
+                    }
+                });
+                request.start();
+            }else {
+                try {
+                    view.setBackgroundColor(Color.parseColor(background));
+                }catch(IllegalArgumentException e) {
+                    Util.log("Style error", e.getMessage());
+                }
+            }
         }
 
         return view;
