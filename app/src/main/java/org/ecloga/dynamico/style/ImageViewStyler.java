@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import org.apache.commons.io.FileUtils;
 import org.ecloga.dynamico.Util;
+import org.ecloga.dynamico.ViewFactory;
 import org.ecloga.dynamico.network.ApiResponse;
 import org.ecloga.dynamico.network.ImageDownload;
 import org.json.JSONObject;
@@ -19,8 +20,8 @@ public class ImageViewStyler extends DefaultStyler {
 
     private boolean cache;
 
-    public ImageViewStyler(Context context) {
-        super(context);
+    public ImageViewStyler(ViewFactory factory, Context context) {
+        super(factory, context);
     }
 
     @Override

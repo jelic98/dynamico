@@ -69,8 +69,6 @@ public abstract class ApiRequest extends AsyncTask<Void, Void, String> {
     protected void onPreExecute() {
         super.onPreExecute();
 
-        Util.blockTouches(context);
-
         if(!Util.hasNetworkAccess(context)) {
             error = ERROR_DISCONNECTED;
             cancel(true);
@@ -86,21 +84,16 @@ public abstract class ApiRequest extends AsyncTask<Void, Void, String> {
     protected void onCancelled() {
         super.onCancelled();
 
-        finish();
+        handle();
     }
 
     @Override
     protected void onPostExecute(String aVoid) {
         super.onPostExecute(aVoid);
 
-        finish();
-    }
-
-    private void finish() {
-        Util.allowTouches(context);
-
         handle();
     }
+
 
     public ApiRequest addHandler(ApiResponse responseHandler) {
         this.handler = responseHandler;

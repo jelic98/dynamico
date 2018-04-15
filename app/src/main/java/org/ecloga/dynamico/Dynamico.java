@@ -13,6 +13,7 @@ public class Dynamico {
         }
 
         this.loader = new DynamicoLoader(url, name, layout);
+        this.options = new DynamicoOptions();
     }
 
     public Dynamico setListener(DynamicoListener listener) {

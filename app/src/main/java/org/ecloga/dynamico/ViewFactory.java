@@ -61,15 +61,15 @@ public class ViewFactory {
         return (View) constructor.newInstance(context);
     }
 
-    private View styleView(View view, JSONObject attributes) throws Exception {
+    public View styleView(View view, JSONObject attributes) throws Exception {
         Util.log("Dynamico", "Styling view " + view.getClass().getSimpleName());
 
         if(view instanceof TextView) {
-            view = new TextViewStyler(context).style(view, attributes);
+            view = new TextViewStyler(this, context).style(view, attributes);
         }else if(view instanceof ImageView) {
-            view = new ImageViewStyler(context).style(view, attributes);
+            view = new ImageViewStyler(this, context).style(view, attributes);
         }else if(view instanceof LinearLayout) {
-            view = new LinearLayoutStyler(context).style(view, attributes);
+            view = new LinearLayoutStyler(this, context).style(view, attributes);
         }
 
         return view;

@@ -1,14 +1,9 @@
 package org.ecloga.dynamico;
 
-import android.app.Activity;
-import android.os.Build;
+import android.graphics.Color;
 import android.util.Log;
 import android.content.Context;
 import android.net.ConnectivityManager;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.Toast;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -26,42 +21,18 @@ public class Util {
         return cm.getActiveNetworkInfo() != null;
     }
 
-    public static void blockTouches(Context context) {
-        ((Activity) context).getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-    }
-
-    public static void allowTouches(Context context) {
-        ((Activity) context).getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-    }
-
-    private static int dpToPx(int dp, Context context) {
-        return (int) (context.getResources().getDisplayMetrics().density * dp);
-    }
-
-    private static int spToPx(int sp, Context context) {
-        return (int) (context.getResources().getDisplayMetrics().scaledDensity * sp);
-    }
-
-    public static int unitToPx(String dimension, Context context) {
-        String unit = dimension.substring(0, dimension.length() - 2);
-
-        int value = Integer.parseInt(unit);
-
-        if(unit.equalsIgnoreCase("dp")) {
-            return Util.dpToPx(value, context);
-        }else if(unit.equalsIgnoreCase("sp")) {
-            return Util.spToPx(value, context);
-        }else {
-            return value;
-        }
-    }
-
     public static boolean isValidURL(String url) {
+        return url.contains("https")
+                || url.contains("http")
+                || url.contains("fpt")
+                || url.contains("file");
+    }
+
+    public static boolean isValidColor(String url) {
         try {
-            new URI(url).parseServerAuthority();
+            Color.parseColor(url);
             return true;
-        }catch(URISyntaxException e) {
+        }catch(IllegalArgumentException e) {
             return false;
         }
     }

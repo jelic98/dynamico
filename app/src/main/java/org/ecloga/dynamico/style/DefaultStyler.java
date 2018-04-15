@@ -7,23 +7,32 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import org.ecloga.dynamico.Display;
 import org.ecloga.dynamico.Util;
+import org.ecloga.dynamico.ViewFactory;
 import org.ecloga.dynamico.network.ApiResponse;
 import org.ecloga.dynamico.network.ImageDownload;
+import org.json.JSONArray;
 import org.json.JSONObject;
+import java.lang.reflect.Field;
 
 public class DefaultStyler implements Styler {
 
+    private ViewFactory factory;
     protected Context context;
 
-    public DefaultStyler(Context context) {
+    public DefaultStyler(ViewFactory factory, Context context) {
+        this.factory = factory;
         this.context = context;
     }
 
     @Override
     public View style(final View view, JSONObject attributes) throws Exception {
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
+
+        if(params == null) {
+            params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
 
         if(attributes.has("layout_width")) {
             String width = attributes.getString("layout_width");
@@ -33,7 +42,7 @@ public class DefaultStyler implements Styler {
             }else if(width.equalsIgnoreCase("wrap_content")) {
                 params.width = ViewGroup.LayoutParams.WRAP_CONTENT;
             }else {
-                params.height = Util.unitToPx(width, context);
+                params.height = Display.unitToPx(width, context);
             }
         }
 
@@ -45,37 +54,45 @@ public class DefaultStyler implements Styler {
             }else if(width.equalsIgnoreCase("wrap_content")) {
                 params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
             }else {
-                params.height = Util.unitToPx(width, context);
+                params.height = Display.unitToPx(width, context);
             }
         }
 
         if(attributes.has("layout_margin")) {
-            int margin = Util.unitToPx(attributes.getString("layout_margin"), context);
+            int margin = Display.unitToPx(attributes.getString("layout_margin"), context);
 
             params.setMargins(margin, margin, margin, margin);
         }else {
+            boolean hasMargin = false;
+
             int start = 0;
             int top = 0;
             int end = 0;
             int bottom = 0;
 
             if(attributes.has("layout_marginStart")) {
-                start = Util.unitToPx(attributes.getString("layout_marginStart"), context);
+                start = Display.unitToPx(attributes.getString("layout_marginStart"), context);
+                hasMargin = true;
             }
 
             if(attributes.has("layout_marginTop")) {
-                top = Util.unitToPx(attributes.getString("layout_marginTop"), context);
+                top = Display.unitToPx(attributes.getString("layout_marginTop"), context);
+                hasMargin = true;
             }
 
             if(attributes.has("layout_marginEnd")) {
-                end = Util.unitToPx(attributes.getString("layout_marginEnd"), context);
+                end = Display.unitToPx(attributes.getString("layout_marginEnd"), context);
+                hasMargin = true;
             }
 
             if(attributes.has("layout_marginBottom")) {
-                bottom = Util.unitToPx(attributes.getString("layout_marginBottom"), context);
+                bottom = Display.unitToPx(attributes.getString("layout_marginBottom"), context);
+                hasMargin = true;
             }
 
-            params.setMargins(start, top, end, bottom);
+            if(hasMargin) {
+                params.setMargins(start, top, end, bottom);
+            }
         }
 
         if(attributes.has("layout_gravity")) {
@@ -101,32 +118,40 @@ public class DefaultStyler implements Styler {
         view.setLayoutParams(params);
 
         if(attributes.has("padding")) {
-            int padding = Util.unitToPx(attributes.getString("padding"), context);
+            int padding = Display.unitToPx(attributes.getString("padding"), context);
 
             view.setPadding(padding, padding, padding, padding);
         }else {
+            boolean hasPadding = false;
+
             int start = 0;
             int top = 0;
             int end = 0;
             int bottom = 0;
 
             if(attributes.has("paddingStart")) {
-                start = Util.unitToPx(attributes.getString("paddingStart"), context);
+                start = Display.unitToPx(attributes.getString("paddingStart"), context);
+                hasPadding = true;
             }
 
             if(attributes.has("paddingTop")) {
-                top = Util.unitToPx(attributes.getString("paddingTop"), context);
+                top = Display.unitToPx(attributes.getString("paddingTop"), context);
+                hasPadding = true;
             }
 
             if(attributes.has("paddingEnd")) {
-                end = Util.unitToPx(attributes.getString("paddingEnd"), context);
+                end = Display.unitToPx(attributes.getString("paddingEnd"), context);
+                hasPadding = true;
             }
 
             if(attributes.has("paddingBottom")) {
-                bottom = Util.unitToPx(attributes.getString("paddingBottom"), context);
+                bottom = Display.unitToPx(attributes.getString("paddingBottom"), context);
+                hasPadding = true;
             }
 
-            view.setPadding(start, top, end, bottom);
+            if(hasPadding) {
+                view.setPadding(start, top, end, bottom);
+            }
         }
 
         if(attributes.has("visibility")) {
@@ -210,13 +235,32 @@ public class DefaultStyler implements Styler {
                     }
                 });
                 request.start();
-            }else {
+            }else if(Util.isValidColor(background)) {
                 try {
                     view.setBackgroundColor(Color.parseColor(background));
                 }catch(IllegalArgumentException e) {
                     Util.log("Style error", e.getMessage());
                 }
             }
+        }
+
+        if(attributes.has("conditions")) {
+            View conditionView = view;
+
+            JSONArray targets = attributes.getJSONArray("conditions");
+
+            for(int i = 0; i < targets.length(); i++) {
+                JSONObject condition = targets.getJSONObject(i);
+
+                Class config = Class.forName(condition.getString("class"));
+                String value = config.getDeclaredField(condition.getString("field")).get(config).toString();
+
+                if(value.equalsIgnoreCase(condition.getString("value"))) {
+                    conditionView = factory.styleView(view, condition.getJSONObject("attributes"));
+                }
+            }
+
+            return conditionView;
         }
 
         return view;

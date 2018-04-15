@@ -6,13 +6,15 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
+import org.ecloga.dynamico.Display;
 import org.ecloga.dynamico.Util;
+import org.ecloga.dynamico.ViewFactory;
 import org.json.JSONObject;
 
 public class TextViewStyler extends DefaultStyler {
 
-    public TextViewStyler(Context context) {
-        super(context);
+    public TextViewStyler(ViewFactory factory, Context context) {
+        super(factory, context);
     }
 
     @Override
@@ -26,7 +28,7 @@ public class TextViewStyler extends DefaultStyler {
         }
 
         if(attributes.has("textSize")) {
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, Util.unitToPx(attributes.getString("textSize"), context));
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, Display.unitToPx(attributes.getString("textSize"), context));
         }
 
         if(attributes.has("textColor")) {

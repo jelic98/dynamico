@@ -112,8 +112,7 @@ setOptions(CACHE_ONLY)
 ## TODO
 
 * Support vector drawables
-* Make ordinary click listener actions like finish activity, start a new one etc.
-* Make interface for custom click listeners
-* Use configuration fields to modify layout
+* Add click listeners
+* Add detailed usage and more examples in README
 
 ### Still pretty fresh. Stay tuned!

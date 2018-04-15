@@ -3,13 +3,13 @@ package org.ecloga.dynamico.style;
 import android.content.Context;
 import android.view.View;
 import android.widget.LinearLayout;
-import org.json.JSONException;
+import org.ecloga.dynamico.ViewFactory;
 import org.json.JSONObject;
 
 public class LinearLayoutStyler extends DefaultStyler {
 
-    public LinearLayoutStyler(Context context) {
-        super(context);
+    public LinearLayoutStyler(ViewFactory factory, Context context) {
+        super(factory, context);
     }
 
     @Override
