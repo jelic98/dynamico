@@ -90,7 +90,7 @@ new Dynamico("http://ecloga.org/dynamico",
 * Listener for layout inflation state
 
 ```java
-setLayoutStateListener(new LayoutStateListener() {
+setListener(new LayoutStateListener() {
 	@Override
 	public void onSuccess(String message) {
 		// everything is okay
