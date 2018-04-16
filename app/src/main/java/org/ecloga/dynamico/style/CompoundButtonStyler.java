@@ -56,7 +56,15 @@ public class CompoundButtonStyler extends TextViewStyler implements OnDrawableLo
             for(int i = 0; i < parameters.length(); i++) {
                 JSONObject p = parameters.getJSONObject(i);
 
-                types.add(Class.forName(p.getString("type")));
+                Class type = Class.forName(p.getString("type"));
+
+                types.add(type);
+
+                if(type == Context.class) {
+                    args.add(context);
+                    continue;
+                }
+
                 args.add(p.get("value"));
             }
 
