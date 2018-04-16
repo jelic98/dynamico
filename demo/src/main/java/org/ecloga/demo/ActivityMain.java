@@ -34,7 +34,13 @@ public class ActivityMain extends AppCompatActivity {
         }
     }
 
+    // parameters cannot be primitive types
     public static void onImageClick(String name, Integer age) {
-        Util.log("ActivityMain", "Name: " + name + " Age: " + age);
+        Util.log("ActivityMain - onClick", "Name: " + name + " Age: " + age);
+    }
+
+    // first argument must be boolean and it will be used as 'checked' flag
+    public static void onButtonCheck(Boolean isChecked, String message) {
+        Util.log("ActivityMain - onCheck", "Checked: " + isChecked + " Message: " + message);
     }
 }

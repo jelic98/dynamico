@@ -1,9 +1,15 @@
 package org.ecloga.dynamico;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import org.apache.commons.io.FileUtils;
 import org.ecloga.dynamico.network.ApiResponse;
 import org.ecloga.dynamico.network.FileDownload;
+import org.ecloga.dynamico.network.ImageDownload;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.BufferedReader;
@@ -11,16 +17,16 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class DynamicoLoader {
+public class LayoutLoader {
 
-    private static final String TAG = "Dynamico.DynamicoLoader";
+    private static final String TAG = "Dynamico.LayoutLoader";
 
     private String url, name;
     private ViewGroup layout;
     private Context context;
     private DynamicoListener listener;
 
-    public DynamicoLoader(String url, String name, ViewGroup layout) {
+    public LayoutLoader(String url, String name, ViewGroup layout) {
         this.url = url;
         this.name = name + ".json";
         this.layout = layout;

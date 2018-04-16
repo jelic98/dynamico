@@ -1,5 +1,5 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![](https://jitpack.io/v/jelic98/dashbug.svg)](https://jitpack.io/#jelic98/dashbug)
+[![](https://jitpack.io/v/jelic98/dynamico.svg)](https://jitpack.io/#jelic98/dynamico)
 
 # Dynamico
 
@@ -106,7 +106,7 @@ setListener(new LayoutStateListener() {
 	public void onError(String message) {
 		// notify user
 	}
-});
+})
 ```
 
 * Force loading from cache (skip layout fetching from server)
@@ -115,8 +115,20 @@ setListener(new LayoutStateListener() {
 setOptions(CACHE_ONLY)
 ```
 
+## Classes of supported views in package 'android.widget'
+* EditText
+* TextView
+* ImageView
+* Button
+* CompoundButton (CheckBox, RadioButton, Switch, ToggleButton)
+* LinearLayout
+
 ## TODO
 
+* Extract DrawableLoaders - implement cache
+* Extract listeners
+* Support RelativeLayout, ConstraintLayout, Gridlayout, FrameLayout, etc.
+* Custom layouts
 * Support vector drawables
 * Add detailed usage and more examples in README
 

@@ -1,13 +1,9 @@
 package org.ecloga.dynamico;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.lang.reflect.Constructor;
@@ -66,7 +62,15 @@ public class ViewFactory {
     public View styleView(View view, JSONObject attributes) throws Exception {
         Util.log(TAG, "Styling view " + view.getClass().getSimpleName());
 
-        if(view instanceof TextView) {
+        if(view instanceof Switch) {
+            view = new SwitchStyler(this, context).style(view, attributes);
+        }else if(view instanceof ToggleButton) {
+            view = new ToggleButtonStyler(this, context).style(view, attributes);
+        }else if(view instanceof CompoundButton) {
+            view = new CompoundButtonStyler(this, context).style(view, attributes);
+        }else if(view instanceof EditText) {
+            view = new EditTextStyler(this, context).style(view, attributes);
+        }else if(view instanceof TextView) {
             view = new TextViewStyler(this, context).style(view, attributes);
         }else if(view instanceof ImageView) {
             view = new ImageViewStyler(this, context).style(view, attributes);

@@ -6,6 +6,7 @@ import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import org.ecloga.dynamico.Display;
 import org.ecloga.dynamico.Util;
@@ -58,6 +59,18 @@ public class DefaultStyler implements Styler {
             }else {
                 params.height = Display.unitToPx(width, context);
             }
+        }
+
+        if(attributes.has("minWidth")) {
+            view.setMinimumWidth(Display.unitToPx(attributes.getString("minWidth"), context));
+        }
+
+        if(attributes.has("minHeight")) {
+            view.setMinimumHeight(Display.unitToPx(attributes.getString("minHeight"), context));
+        }
+
+        if(attributes.has("layout_weight")) {
+            params.weight = (float) attributes.getDouble("layout_weight");
         }
 
         if(attributes.has("layout_margin")) {
@@ -270,7 +283,7 @@ public class DefaultStyler implements Styler {
                     try {
                         method.invoke(listener, args.toArray());
                     }catch(Exception e) {
-                        Util.log("Click error", e.getMessage());
+                        Util.log("onClick error", e.getMessage());
                     }
                 }
             });
