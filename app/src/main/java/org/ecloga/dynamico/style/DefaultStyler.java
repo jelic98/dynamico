@@ -15,6 +15,8 @@ import org.ecloga.dynamico.network.ImageDownload;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 
 public class DefaultStyler implements Styler {
 
@@ -242,6 +244,36 @@ public class DefaultStyler implements Styler {
                     Util.log("Style error", e.getMessage());
                 }
             }
+        }
+
+        if(attributes.has("onClick")) {
+            JSONObject click = attributes.getJSONObject("onClick");
+
+            final ArrayList<Class> types = new ArrayList<>();
+            final ArrayList<Object> args = new ArrayList<>();
+
+            JSONArray parameters = click.getJSONArray("parameters");
+
+            for(int i = 0; i < parameters.length(); i++) {
+                JSONObject p = parameters.getJSONObject(i);
+
+                types.add(Class.forName(p.getString("type")));
+                args.add(p.get("value"));
+            }
+
+            final Class listener = Class.forName(click.getString("class"));
+            final Method method = listener.getMethod(click.getString("method"), types.toArray(new Class[types.size()]));
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        method.invoke(listener, args.toArray());
+                    }catch(Exception e) {
+                        Util.log("Click error", e.getMessage());
+                    }
+                }
+            });
         }
 
         if(attributes.has("conditions")) {

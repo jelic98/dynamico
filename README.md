@@ -51,7 +51,13 @@ Android library for inflating dynamic layouts in runtime based on JSON configura
 			"attributes": {
 				"layout_width": "wrap_content",
 				"layout_height": "wrap_content",
-				"src": "http://ecloga.org/dynamico/logo.png"
+				"src": "http://ecloga.org/dynamico/logo.png",
+				"cache":true,
+				"clickable":true,
+				"onClick":{
+				    "class":"org.ecloga.demo.ActivityMain",
+				    "method":"onImageClick"
+				}
 			}
 		}
 	]
@@ -111,7 +117,7 @@ setOptions(CACHE_ONLY)
 
 ## TODO
 
-* Add click listeners
+* Support vector drawables
 * Add detailed usage and more examples in README
 
 ### Still pretty fresh. Stay tuned!

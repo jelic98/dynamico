@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import org.ecloga.dynamico.Dynamico;
 import org.ecloga.dynamico.DynamicoException;
 import org.ecloga.dynamico.DynamicoListener;
+import org.ecloga.dynamico.Util;
 
 public class ActivityMain extends AppCompatActivity {
 
@@ -31,5 +32,9 @@ public class ActivityMain extends AppCompatActivity {
         }catch(DynamicoException e) {
             finish();
         }
+    }
+
+    public static void onImageClick(String name, Integer age) {
+        Util.log("ActivityMain", "Name: " + name + " Age: " + age);
     }
 }
