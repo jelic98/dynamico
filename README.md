@@ -129,6 +129,5 @@ setOptions(CACHE_ONLY)
 * Custom layouts
 * Support vector drawables
 * Add detailed usage and more examples in README
-* Remove demo module from JitPack
 
 ### Still pretty fresh. Stay tuned!

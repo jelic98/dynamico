@@ -19,27 +19,31 @@ final class MethodInvoker {
     private Method method;
 
     private MethodInvoker(String name, JSONObject attributes, Context context) throws Exception {
+        attributes = attributes.getJSONObject(name);
+
         this.name = name;
-        this.attributes = attributes.getJSONObject(name);
+        this.attributes = attributes;
 
         types = new ArrayList<>();
         args = new ArrayList<>();
 
-        JSONArray parameters = attributes.getJSONArray("parameters");
+        if(attributes.has("parameters")) {
+            JSONArray parameters = attributes.getJSONArray("parameters");
 
-        for(int i = 0; i < parameters.length(); i++) {
-            JSONObject p = parameters.getJSONObject(i);
+            for(int i = 0; i < parameters.length(); i++) {
+                JSONObject p = parameters.getJSONObject(i);
 
-            Class type = Class.forName(p.getString("type"));
+                Class type = Class.forName(p.getString("type"));
 
-            types.add(type);
+                types.add(type);
 
-            if(type == Context.class) {
-                args.add(context);
-                continue;
+                if(type == Context.class) {
+                    args.add(context);
+                    continue;
+                }
+
+                args.add(p.get("value"));
             }
-
-            args.add(p.get("value"));
         }
 
         listener = Class.forName(attributes.getString("class"));

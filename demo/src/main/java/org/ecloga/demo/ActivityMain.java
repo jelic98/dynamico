@@ -37,11 +37,11 @@ public class ActivityMain extends AppCompatActivity {
 
     // parameters cannot be primitive types
     public static void onImageClick(String name, Integer age, Context context) {
-        Toast.makeText(context, "Name: " + name + " Age: " + age, Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Name: " + name + "\nAge: " + age, Toast.LENGTH_SHORT).show();
     }
 
     // first argument must be boolean and it will be used as 'checked' flag
     public static void onButtonCheck(Boolean isChecked, String message, Context context) {
-        Toast.makeText(context, "Checked: " + isChecked + " Message: " + message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Checked: " + isChecked + "\nMessage: " + message, Toast.LENGTH_SHORT).show();
     }
 }
