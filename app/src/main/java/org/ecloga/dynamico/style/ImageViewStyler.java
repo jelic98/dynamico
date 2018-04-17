@@ -27,15 +27,8 @@ public class ImageViewStyler extends DefaultStyler implements OnDrawableLoadedLi
         imageView = (ImageView) view;
 
         if(attributes.has("src")) {
-            String src = attributes.getString("src");
-
-            boolean cache = false;
-
-            if(attributes.has("cache")) {
-                cache = attributes.getBoolean("cache");
-            }
-
-            new DrawableLoader(cache, this, context).load(src, LOAD_SRC);
+            new DrawableLoader(attributes, this, context)
+                    .load(attributes.getString("src"), LOAD_SRC);
         }
 
         if(attributes.has("scaleType")) {

@@ -1,5 +1,6 @@
 package org.ecloga.dynamico.style;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.Gravity;
@@ -257,39 +258,14 @@ public class DefaultStyler implements Styler {
         }
 
         if(attributes.has("onClick")) {
-            JSONObject click = attributes.getJSONObject("onClick");
-
-            final ArrayList<Class> types = new ArrayList<>();
-            final ArrayList<Object> args = new ArrayList<>();
-
-            JSONArray parameters = click.getJSONArray("parameters");
-
-            for(int i = 0; i < parameters.length(); i++) {
-                JSONObject p = parameters.getJSONObject(i);
-
-                Class type = Class.forName(p.getString("type"));
-
-                types.add(type);
-
-                if(type == Context.class) {
-                    args.add(context);
-                    continue;
-                }
-
-                args.add(p.get("value"));
-            }
-
-            final Class listener = Class.forName(click.getString("class"));
-            final Method method = listener.getMethod(click.getString("method"), types.toArray(new Class[types.size()]));
+            final MethodInvoker invoker = new MethodInvoker
+                    .Builder("onClick", attributes, context)
+                    .build();
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    try {
-                        method.invoke(listener, args.toArray());
-                    }catch(Exception e) {
-                        Util.log("onClick error", e.getMessage());
-                    }
+                    invoker.invoke();
                 }
             });
         }

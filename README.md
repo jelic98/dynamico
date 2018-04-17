@@ -127,8 +127,6 @@ setOptions(CACHE_ONLY)
 
 * Support RelativeLayout, ConstraintLayout, Gridlayout, FrameLayout, etc.
 * Custom layouts
-* Extract DrawableLoaders - implement cache
-* Extract listeners
 * Limit class visibility
 * Support vector drawables
 * Add detailed usage and more examples in README

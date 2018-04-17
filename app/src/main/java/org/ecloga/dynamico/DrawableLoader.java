@@ -6,6 +6,9 @@ import android.graphics.drawable.BitmapDrawable;
 import org.apache.commons.io.FileUtils;
 import org.ecloga.dynamico.network.ApiResponse;
 import org.ecloga.dynamico.network.ImageDownload;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 
@@ -15,16 +18,17 @@ public class DrawableLoader {
 
     private int requestCode;
 
-    private boolean cache;
+    private boolean cache, used;
     private OnDrawableLoadedListener listener;
     private Context context;
 
-    private boolean used;
-
-    public DrawableLoader(boolean cache, OnDrawableLoadedListener listener, Context context) {
-        this.cache = cache;
+    public DrawableLoader(JSONObject attributes, OnDrawableLoadedListener listener, Context context) throws JSONException {
         this.listener = listener;
         this.context = context;
+
+        if(attributes.has("cache")) {
+            cache = attributes.getBoolean("cache");
+        }
     }
 
     public void load(String src, int requestCode) {

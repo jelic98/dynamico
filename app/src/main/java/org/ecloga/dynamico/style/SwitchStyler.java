@@ -48,27 +48,13 @@ public class SwitchStyler extends CompoundButtonStyler {
         }
 
         if(attributes.has("thumbDrawable")) {
-            String src = attributes.getString("thumbDrawable");
-
-            boolean cache = false;
-
-            if(attributes.has("cache")) {
-                cache = attributes.getBoolean("cache");
-            }
-
-            new DrawableLoader(cache, this, context).load(src, LOAD_THUMB_DRAWABLE);
+            new DrawableLoader(attributes, this, context)
+                    .load(attributes.getString("thumbDrawable"), LOAD_THUMB_DRAWABLE);
         }
 
         if(attributes.has("trackDrawable")) {
-            String src = attributes.getString("trackDrawable");
-
-            boolean cache = false;
-
-            if(attributes.has("cache")) {
-                cache = attributes.getBoolean("cache");
-            }
-
-            new DrawableLoader(cache, this, context).load(src, LOAD_TRACK_DRAWABLE);
+            new DrawableLoader(attributes, this, context)
+                    .load(attributes.getString("trackDrawable"), LOAD_TRACK_DRAWABLE);
         }
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
