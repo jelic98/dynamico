@@ -1,1 +1,4 @@
-include ':app', ':demo'
+include ':app'
+
+if(!System.env.JITPACK)
+    include ':demo'
