@@ -22,7 +22,7 @@ Android library for inflating dynamic layouts in runtime based on JSON configura
 
 ```gradle
     dependencies {
-    	compile 'com.github.jelic98:dynamico:1.0.1'
+		compile 'com.github.jelic98:dynamico:1.1.0'
 	}
 ```
 
