@@ -5,19 +5,16 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.View;
 import android.widget.Switch;
-import org.ecloga.dynamico.Display;
-import org.ecloga.dynamico.DrawableLoader;
-import org.ecloga.dynamico.ViewFactory;
 import org.json.JSONObject;
 
-public class SwitchStyler extends CompoundButtonStyler {
+final class SwitchStyler extends CompoundButtonStyler {
 
     private static final int LOAD_THUMB_DRAWABLE = 2;
     private static final int LOAD_TRACK_DRAWABLE = 3;
 
     private Switch switchButton;
 
-    public SwitchStyler(ViewFactory factory, Context context) {
+    SwitchStyler(ViewFactory factory, Context context) {
         super(factory, context);
     }
 

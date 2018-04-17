@@ -4,18 +4,15 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.CompoundButton;
-import org.ecloga.dynamico.DrawableLoader;
-import org.ecloga.dynamico.ViewFactory;
-import org.ecloga.dynamico.OnDrawableLoadedListener;
 import org.json.JSONObject;
 
-public class CompoundButtonStyler extends TextViewStyler implements OnDrawableLoadedListener {
+class CompoundButtonStyler extends TextViewStyler implements OnDrawableLoadedListener {
 
     private static final int LOAD_BUTTON_DRAWABLE = 1;
 
     private CompoundButton compoundButton;
 
-    public CompoundButtonStyler(ViewFactory factory, Context context) {
+    CompoundButtonStyler(ViewFactory factory, Context context) {
         super(factory, context);
     }
 

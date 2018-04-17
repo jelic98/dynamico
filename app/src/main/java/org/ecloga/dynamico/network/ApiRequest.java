@@ -16,14 +16,15 @@ public abstract class ApiRequest extends AsyncTask<Void, Void, String> {
 
     private static final String ERROR_DISCONNECTED = "No internet connection";
 
-    protected byte[] responseBytes;
-    protected String url, output, error, type;
+    byte[] responseBytes;
+    String url, output, error;
+    private String type;
     protected Context context;
 
     private OkHttpClient client;
     private ApiResponse handler;
 
-    protected ApiRequest() {
+    ApiRequest() {
         client = new OkHttpClient.Builder()
                 .connectTimeout(3, TimeUnit.MINUTES)
                 .readTimeout(3, TimeUnit.MINUTES)
@@ -33,7 +34,17 @@ public abstract class ApiRequest extends AsyncTask<Void, Void, String> {
         type = "application/json";
     }
 
-    protected void executeRequest() {
+    public ApiRequest addHandler(ApiResponse responseHandler) {
+        this.handler = responseHandler;
+
+        return this;
+    }
+
+    public void start() {
+        executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+    }
+
+    void executeRequest() {
         Request request;
 
         request = requestBuilder().get().build();
@@ -94,17 +105,6 @@ public abstract class ApiRequest extends AsyncTask<Void, Void, String> {
         handle();
     }
 
-
-    public ApiRequest addHandler(ApiResponse responseHandler) {
-        this.handler = responseHandler;
-
-        return this;
-    }
-
-    public void start() {
-        executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-    }
-
     private void handle() {
         if(handler != null) {
             if(error != null) {
@@ -121,11 +121,11 @@ public abstract class ApiRequest extends AsyncTask<Void, Void, String> {
                 .addHeader("Accept", getType());
     }
 
-    public String getType() {
+    String getType() {
         return type;
     }
 
-    public void setType(String type) {
+    void setType(String type) {
         this.type = type;
     }
 }

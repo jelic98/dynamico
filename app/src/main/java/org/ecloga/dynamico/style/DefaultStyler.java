@@ -1,28 +1,23 @@
 package org.ecloga.dynamico.style;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import org.ecloga.dynamico.Display;
 import org.ecloga.dynamico.Util;
-import org.ecloga.dynamico.ViewFactory;
 import org.ecloga.dynamico.network.ApiResponse;
 import org.ecloga.dynamico.network.ImageDownload;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
 
-public class DefaultStyler implements Styler {
+class DefaultStyler implements Styler {
 
     private ViewFactory factory;
     protected Context context;
 
-    public DefaultStyler(ViewFactory factory, Context context) {
+    DefaultStyler(ViewFactory factory, Context context) {
         this.factory = factory;
         this.context = context;
     }

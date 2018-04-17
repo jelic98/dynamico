@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MethodInvoker {
+final class MethodInvoker {
 
     private String name;
     private JSONObject attributes;
@@ -24,8 +24,6 @@ public class MethodInvoker {
 
         types = new ArrayList<>();
         args = new ArrayList<>();
-
-        // class:Class - name:String - object:Object
 
         JSONArray parameters = attributes.getJSONArray("parameters");
 
@@ -68,7 +66,7 @@ public class MethodInvoker {
         }
     }
 
-    public void invoke(Object ... varargs) {
+    void invoke(Object ... varargs) {
         setAdditionalArgs(varargs);
 
         try {
@@ -78,21 +76,21 @@ public class MethodInvoker {
         }
     }
 
-    public static class Builder {
+    static class Builder {
 
         private MethodInvoker invoker;
 
-        public Builder(String name, JSONObject attributes, Context context) throws Exception {
+        Builder(String name, JSONObject attributes, Context context) throws Exception {
             invoker = new MethodInvoker(name, attributes, context);
         }
 
-        public Builder setAdditionalTypes(Class ... types) throws Exception {
+        Builder setAdditionalTypes(Class ... types) throws Exception {
             invoker.setAdditionalTypes(types);
 
             return this;
         }
 
-        public MethodInvoker build() throws Exception {
+        MethodInvoker build() throws Exception {
             invoker.initialize();
 
             return invoker;

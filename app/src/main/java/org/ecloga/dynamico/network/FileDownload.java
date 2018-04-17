@@ -4,7 +4,7 @@ import android.content.Context;
 import java.io.File;
 import java.io.FileWriter;
 
-public class FileDownload extends Download {
+public final class FileDownload extends Download {
 
     private File file;
 

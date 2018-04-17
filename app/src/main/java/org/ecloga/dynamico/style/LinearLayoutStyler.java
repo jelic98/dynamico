@@ -4,13 +4,11 @@ import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
-import org.ecloga.dynamico.Display;
-import org.ecloga.dynamico.ViewFactory;
 import org.json.JSONObject;
 
-public class LinearLayoutStyler extends DefaultStyler {
+final class LinearLayoutStyler extends DefaultStyler {
 
-    public LinearLayoutStyler(ViewFactory factory, Context context) {
+    LinearLayoutStyler(ViewFactory factory, Context context) {
         super(factory, context);
     }
 

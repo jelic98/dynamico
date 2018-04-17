@@ -127,8 +127,8 @@ setOptions(CACHE_ONLY)
 
 * Support RelativeLayout, ConstraintLayout, Gridlayout, FrameLayout, etc.
 * Custom layouts
-* Limit class visibility
 * Support vector drawables
 * Add detailed usage and more examples in README
+* Remove demo module from JitPack
 
 ### Still pretty fresh. Stay tuned!

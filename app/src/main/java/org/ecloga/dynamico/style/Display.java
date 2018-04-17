@@ -1,8 +1,9 @@
-package org.ecloga.dynamico;
+package org.ecloga.dynamico.style;
 
 import android.content.Context;
+import org.ecloga.dynamico.Util;
 
-public class Display {
+class Display {
 
     private static int dpToPx(int dp, Context context) {
         return (int) (context.getResources().getDisplayMetrics().density * dp);

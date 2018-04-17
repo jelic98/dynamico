@@ -3,12 +3,11 @@ package org.ecloga.dynamico.style;
 import android.content.Context;
 import android.view.View;
 import android.widget.ToggleButton;
-import org.ecloga.dynamico.ViewFactory;
 import org.json.JSONObject;
 
-public class ToggleButtonStyler extends CompoundButtonStyler {
+final class ToggleButtonStyler extends CompoundButtonStyler {
 
-    public ToggleButtonStyler(ViewFactory factory, Context context) {
+    ToggleButtonStyler(ViewFactory factory, Context context) {
         super(factory, context);
     }
 

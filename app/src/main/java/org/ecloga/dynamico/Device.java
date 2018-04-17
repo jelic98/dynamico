@@ -3,7 +3,7 @@ package org.ecloga.dynamico;
 import android.os.Build;
 import static org.ecloga.dynamico.Device.Key.*;
 
-public class Device {
+class Device {
 
     public enum Key {
         BRAND,

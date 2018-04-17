@@ -1,8 +1,8 @@
-package org.ecloga.dynamico;
+package org.ecloga.dynamico.style;
 
 import android.graphics.drawable.Drawable;
 
-public interface OnDrawableLoadedListener {
+interface OnDrawableLoadedListener {
 
     void onDrawableLoaded(Drawable drawable, int requestCode);
 }

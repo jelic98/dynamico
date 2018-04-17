@@ -11,7 +11,7 @@ import java.net.URISyntaxException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class Util {
+public final class Util {
 
     public static void log(String tag, String msg) {
         Log.d((tag != null && !tag.isEmpty()) ? tag : "EMPTY TAG",

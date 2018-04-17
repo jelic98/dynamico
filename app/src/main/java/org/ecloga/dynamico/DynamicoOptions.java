@@ -3,7 +3,7 @@ package org.ecloga.dynamico;
 import java.util.Arrays;
 import java.util.EnumSet;
 
-public class DynamicoOptions {
+class DynamicoOptions {
 
     public enum Option {
         ONLY_CACHE
@@ -11,7 +11,7 @@ public class DynamicoOptions {
 
     private EnumSet<Option> options;
 
-    public DynamicoOptions(Option ... options) {
+    DynamicoOptions(Option ... options) {
         this.options = EnumSet.noneOf(Option.class);
         this.options.addAll(Arrays.asList(options));
     }

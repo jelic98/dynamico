@@ -2,11 +2,11 @@ package org.ecloga.dynamico;
 
 import android.view.ViewGroup;
 
-public class Dynamico {
+public final class Dynamico {
 
     private static final String TAG = "Dynamico";
 
-    private LayoutLoader loader;
+    private DynamicoLayoutLoader loader;
     private DynamicoOptions options;
 
     public Dynamico(String url, String name, ViewGroup layout) throws DynamicoException {
@@ -14,7 +14,7 @@ public class Dynamico {
             throw new DynamicoException("Parameters cannot be null");
         }
 
-        this.loader = new LayoutLoader(url, name, layout);
+        this.loader = new DynamicoLayoutLoader(url, name, layout);
         this.options = new DynamicoOptions();
     }
 

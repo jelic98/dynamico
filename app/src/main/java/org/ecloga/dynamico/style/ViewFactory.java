@@ -1,15 +1,16 @@
-package org.ecloga.dynamico;
+package org.ecloga.dynamico.style;
 
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import org.ecloga.dynamico.Util;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.lang.reflect.Constructor;
 import org.ecloga.dynamico.style.*;
 
-public class ViewFactory {
+public final class ViewFactory {
 
     private static final String TAG = "Dynamico.ViewFactory";
 

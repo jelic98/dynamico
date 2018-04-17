@@ -4,19 +4,16 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
-import org.ecloga.dynamico.DrawableLoader;
 import org.ecloga.dynamico.Util;
-import org.ecloga.dynamico.ViewFactory;
-import org.ecloga.dynamico.OnDrawableLoadedListener;
 import org.json.JSONObject;
 
-public class ImageViewStyler extends DefaultStyler implements OnDrawableLoadedListener {
+final class ImageViewStyler extends DefaultStyler implements OnDrawableLoadedListener {
 
     private static final int LOAD_SRC = 1;
 
     private ImageView imageView;
 
-    public ImageViewStyler(ViewFactory factory, Context context) {
+    ImageViewStyler(ViewFactory factory, Context context) {
         super(factory, context);
     }
 

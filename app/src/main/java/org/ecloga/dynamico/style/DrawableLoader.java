@@ -1,18 +1,18 @@
-package org.ecloga.dynamico;
+package org.ecloga.dynamico.style;
 
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import org.apache.commons.io.FileUtils;
+import org.ecloga.dynamico.Util;
 import org.ecloga.dynamico.network.ApiResponse;
 import org.ecloga.dynamico.network.ImageDownload;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 
-public class DrawableLoader {
+final class DrawableLoader {
 
     private static final String TAG = "Dynamico.DrawableLoader";
 
@@ -22,7 +22,7 @@ public class DrawableLoader {
     private OnDrawableLoadedListener listener;
     private Context context;
 
-    public DrawableLoader(JSONObject attributes, OnDrawableLoadedListener listener, Context context) throws JSONException {
+    DrawableLoader(JSONObject attributes, OnDrawableLoadedListener listener, Context context) throws JSONException {
         this.listener = listener;
         this.context = context;
 
@@ -31,7 +31,7 @@ public class DrawableLoader {
         }
     }
 
-    public void load(String src, int requestCode) {
+    void load(String src, int requestCode) {
         if(used) {
             Util.log(TAG, "DrawableLoader cannot be reused. Please construct new one to load another drawable.");
             return;

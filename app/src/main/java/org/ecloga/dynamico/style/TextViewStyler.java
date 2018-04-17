@@ -6,14 +6,12 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
-import org.ecloga.dynamico.Display;
 import org.ecloga.dynamico.Util;
-import org.ecloga.dynamico.ViewFactory;
 import org.json.JSONObject;
 
-public class TextViewStyler extends DefaultStyler {
+class TextViewStyler extends DefaultStyler {
 
-    public TextViewStyler(ViewFactory factory, Context context) {
+    TextViewStyler(ViewFactory factory, Context context) {
         super(factory, context);
     }
 

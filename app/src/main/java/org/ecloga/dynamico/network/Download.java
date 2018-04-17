@@ -3,9 +3,9 @@ package org.ecloga.dynamico.network;
 import android.content.Context;
 import org.ecloga.dynamico.Util;
 
-public abstract class Download extends ApiRequest {
+abstract class Download extends ApiRequest {
 
-    public Download(String url, Context context) {
+    Download(String url, Context context) {
         this.url = url;
         this.context = context;
     }

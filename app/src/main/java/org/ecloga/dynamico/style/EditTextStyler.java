@@ -1,21 +1,14 @@
 package org.ecloga.dynamico.style;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.text.TextUtils;
-import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
-import org.ecloga.dynamico.Display;
-import org.ecloga.dynamico.Util;
-import org.ecloga.dynamico.ViewFactory;
 import org.json.JSONObject;
 
-public class EditTextStyler extends TextViewStyler {
+final class EditTextStyler extends TextViewStyler {
 
-    public EditTextStyler(ViewFactory factory, Context context) {
+    EditTextStyler(ViewFactory factory, Context context) {
         super(factory, context);
     }
 

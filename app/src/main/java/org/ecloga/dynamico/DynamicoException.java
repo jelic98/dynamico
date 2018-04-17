@@ -1,8 +1,8 @@
 package org.ecloga.dynamico;
 
-public class DynamicoException extends Exception {
+public final class DynamicoException extends Exception {
 
-    public DynamicoException(String message) {
+    DynamicoException(String message) {
         super(message);
     }
 }
