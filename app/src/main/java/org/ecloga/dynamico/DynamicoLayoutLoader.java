@@ -23,9 +23,13 @@ final class DynamicoLayoutLoader {
 
     DynamicoLayoutLoader(String url, String name, ViewGroup layout) {
         this.url = url;
-        this.name = name + ".json";
+        this.name = name;
         this.layout = layout;
         this.context = layout.getContext();
+
+        if(!this.name.endsWith(".json")) {
+            this.name += ".json";
+        }
     }
 
     public void setListener(DynamicoListener listener) {
