@@ -11,17 +11,16 @@ import java.util.List;
 
 final class MethodInvoker {
 
-    private String name;
+    private static final String TAG = "Dynamico.MethodInvoker";
+
     private JSONObject attributes;
     private ArrayList<Class> types;
     private ArrayList<Object> args;
-    private Class listener;
     private Method method;
+    private Class listenerClass;
+    private Object listenerObject;
 
-    private MethodInvoker(String name, JSONObject attributes, Context context) throws Exception {
-        attributes = attributes.getJSONObject(name);
-
-        this.name = name;
+    private MethodInvoker(JSONObject attributes, Context context) throws Exception {
         this.attributes = attributes;
 
         types = new ArrayList<>();
@@ -46,14 +45,17 @@ final class MethodInvoker {
             }
         }
 
-        listener = Class.forName(attributes.getString("class"));
+        if(attributes.has("class")) {
+            listenerClass = Class.forName(attributes.getString("class"));
+            listenerObject = listenerClass;
+        }
     }
 
     private void initialize() throws Exception {
-        method = listener.getMethod(attributes.getString("method"), types.toArray(new Class[types.size()]));
+        method = listenerClass.getMethod(attributes.getString("method"), types.toArray(new Class[types.size()]));
     }
 
-    private void setAdditionalTypes(Class ... varargs) {
+    private void setRequiredTypes(Class ... varargs) {
         List<Class> types = Arrays.asList(varargs);
 
         for(int i = types.size() - 1; i >= 0; i--) {
@@ -62,7 +64,7 @@ final class MethodInvoker {
         }
     }
 
-    private void setAdditionalArgs(Object ... varargs) {
+    private void setRequiredArgs(Object ... varargs) {
         List<Object> args = Arrays.asList(varargs);
 
         for(int i = 0; i < args.size(); i++) {
@@ -71,12 +73,12 @@ final class MethodInvoker {
     }
 
     void invoke(Object ... varargs) {
-        setAdditionalArgs(varargs);
+        setRequiredArgs(varargs);
 
         try {
-            method.invoke(listener, this.args.toArray());
+            method.invoke(listenerObject, args.toArray());
         }catch(Exception e) {
-            Util.log(name + " error", e.getMessage());
+            Util.log(TAG, e.getMessage());
         }
     }
 
@@ -84,16 +86,45 @@ final class MethodInvoker {
 
         private MethodInvoker invoker;
 
-        Builder(String name, JSONObject attributes, Context context) throws Exception {
-            invoker = new MethodInvoker(name, attributes, context);
+        /**
+         * Constructor used for invoking static methods
+         * @param attributes holds class name, method name and array of parameters
+         * @param context some methods invoked with reflection might be context dependent
+         * @throws Exception if MethodInvoker's construction produces Exception
+         */
+        Builder(JSONObject attributes, Context context) throws Exception {
+            invoker = new MethodInvoker(attributes, context);
         }
 
-        Builder setAdditionalTypes(Class ... types) throws Exception {
-            invoker.setAdditionalTypes(types);
+        /**
+         * Constructor used for invoking instance methods
+         * @param custom instance of a class which methods are going to be invoked
+         * @param attributes holds method name and array of parameters
+         * @param context some methods invoked with reflection might be context dependent
+         * @throws Exception if MethodInvoker's construction produces Exception
+         */
+        Builder(Object custom, JSONObject attributes, Context context) throws Exception {
+            invoker = new MethodInvoker(attributes, context);
+
+            invoker.listenerObject = custom;
+            invoker.listenerClass = custom.getClass();
+        }
+
+        /**
+         * Adds required parameter types that are known at compile time
+         * @param types parameter types
+         * @return Builder object ready for initializing MethodInvoker
+         */
+        Builder setRequiredTypes(Class ... types) {
+            invoker.setRequiredTypes(types);
 
             return this;
         }
 
+        /**
+         * Initializes MethodInvoker and returns it
+         * @return MethodInvoker object ready for invoking
+         */
         MethodInvoker build() throws Exception {
             invoker.initialize();
 
