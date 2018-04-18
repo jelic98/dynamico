@@ -2,6 +2,7 @@ package org.ecloga.dynamico.style;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -34,6 +35,20 @@ class TextViewStyler extends DefaultStyler {
                 textView.setTextColor(Color.parseColor(attributes.getString("textColor")));
             }catch(IllegalArgumentException e) {
                 Util.log("Style error", e.getMessage());
+            }
+        }
+
+        if(attributes.has("textStyle")) {
+            String style = attributes.getString("textStyle");
+
+            if(style.equalsIgnoreCase("normal")) {
+                textView.setTypeface(textView.getTypeface(), Typeface.NORMAL);
+            }else if(style.equalsIgnoreCase("bold")) {
+                textView.setTypeface(textView.getTypeface(), Typeface.BOLD);
+            }else if(style.equalsIgnoreCase("italic")) {
+                textView.setTypeface(textView.getTypeface(), Typeface.ITALIC);
+            }else if(style.equalsIgnoreCase("bold_italic")) {
+                textView.setTypeface(textView.getTypeface(), Typeface.BOLD_ITALIC);
             }
         }
 

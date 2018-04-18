@@ -254,7 +254,7 @@ class DefaultStyler implements Styler {
 
         if(attributes.has("onClick")) {
             final MethodInvoker invoker = new MethodInvoker
-                    .Builder("onClick", attributes, context)
+                    .Builder(attributes.getJSONObject("onClick"), context)
                     .build();
 
             view.setOnClickListener(new View.OnClickListener() {

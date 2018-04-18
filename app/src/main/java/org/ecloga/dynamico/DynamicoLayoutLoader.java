@@ -90,6 +90,8 @@ final class DynamicoLayoutLoader {
     }
 
     private void addViews(String content) {
+        ViewFactory factory = new ViewFactory(context);
+
         try {
             JSONObject obj = new JSONObject(content);
 
@@ -105,7 +107,7 @@ final class DynamicoLayoutLoader {
                     String targetValue = target.getString("value");
 
                     if(targetValue.equalsIgnoreCase(Device.getInfo(Device.Key.valueOf(targetKey)))) {
-                        new ViewFactory(context).addViews(layout, target);
+                        factory.addViews(layout, target);
 
                         foundLayout = true;
 
@@ -114,10 +116,10 @@ final class DynamicoLayoutLoader {
                 }
 
                 if(!foundLayout && obj.has("default")) {
-                    new ViewFactory(context).addViews(layout, obj.getJSONObject("default"));
+                    factory.addViews(layout, obj.getJSONObject("default"));
                 }
             }else {
-                new ViewFactory(context).addViews(layout, obj);
+                factory.addViews(layout, obj);
             }
 
             if(listener != null) {

@@ -149,6 +149,8 @@ Attaches options to Dynamico object
 Starts layout fetching from cache/server depending on provided options
 
 ## TODO
-* Support RelativeLayout, ConstraintLayout, Gridlayout, FrameLayout, etc.
-* Custom layouts
+* Support RelativeLayout
 * Support vector drawables
+* Add usage details in MANUAL.md
+* Add replica of some poplar layout
+* Non-stop fetching option

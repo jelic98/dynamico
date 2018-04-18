@@ -7,6 +7,7 @@
 * Device targeting
 * Configuration fields
 * Event listeners
+* Custom views
 * Supported attributes
     * View
     * LinearLayout
@@ -176,6 +177,27 @@
 }
 ```
 
+### Custom views
+
+```json
+{  
+  "class":"android.widget.CustomView",
+  "attributes":{
+    "custom":[  
+      {  
+        "method":"setCustomText",
+        "parameters":[  
+          {  
+            "type":"java.lang.String",
+            "value":"Sample text"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
 ### Supported attributes
 
 #### View
@@ -216,6 +238,7 @@ Inherits everything from View.
     "text":"string",
     "textSize":"units",
     "textColor":"hex_value",
+    "textStyle":"NORMAL | BOLD | ITALIC | BOLD_ITALIC",    
     "gravity":"START | END | TOP | BOTTOM | CENTER | CENTER_HORIZONTAL | CENTER_VERTICAL"
   }
 }

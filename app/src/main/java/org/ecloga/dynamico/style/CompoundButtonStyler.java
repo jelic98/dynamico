@@ -33,8 +33,8 @@ class CompoundButtonStyler extends TextViewStyler implements OnDrawableLoadedLis
 
         if(attributes.has("onCheck")) {
             final MethodInvoker invoker = new MethodInvoker
-                    .Builder("onCheck", attributes, context)
-                    .setAdditionalTypes(Boolean.class)
+                    .Builder(attributes.getJSONObject("onCheck"), context)
+                    .setRequiredTypes(Boolean.class)
                     .build();
 
             compoundButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

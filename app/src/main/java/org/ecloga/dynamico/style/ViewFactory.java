@@ -8,7 +8,6 @@ import org.ecloga.dynamico.Util;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.lang.reflect.Constructor;
-import org.ecloga.dynamico.style.*;
 
 public final class ViewFactory {
 
@@ -78,6 +77,8 @@ public final class ViewFactory {
         }else if(view instanceof LinearLayout) {
             view = new LinearLayoutStyler(this, context).style(view, attributes);
         }
+
+        view = new CustomViewStyler(this, context).style(view, attributes);
 
         return view;
     }
