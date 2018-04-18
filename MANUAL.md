@@ -194,6 +194,17 @@
 
 Inherits everything from View.
 
+```json
+{  
+  "class":"android.widget.LinearLayout",
+  "attributes":{
+    "orientation":"vertical | horizontal",
+    "weightSum":"float",
+    "gravity":"START | END | TOP | BOTTOM | CENTER | CENTER_HORIZONTAL | CENTER_VERTICAL"
+  }
+}
+``` 
+
 #### TextView
 
 Inherits everything from View.

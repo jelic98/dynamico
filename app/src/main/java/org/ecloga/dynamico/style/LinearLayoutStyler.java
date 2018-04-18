@@ -29,7 +29,7 @@ final class LinearLayoutStyler extends DefaultStyler {
         }
 
         if(attributes.has("weightSum")) {
-            linearLayout.setWeightSum(Display.unitToPx(attributes.getString("weightSum"), context));
+            linearLayout.setWeightSum((float) attributes.getDouble("weightSum"));
         }
 
         if(attributes.has("gravity")) {
