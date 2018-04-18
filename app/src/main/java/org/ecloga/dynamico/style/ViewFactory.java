@@ -76,6 +76,10 @@ public final class ViewFactory {
             view = new ImageViewStyler(this, context).style(view, attributes);
         }else if(view instanceof LinearLayout) {
             view = new LinearLayoutStyler(this, context).style(view, attributes);
+        }else if(view instanceof ScrollView) {
+            view = new ScrollViewStyler(this, context).style(view, attributes);
+        }else if(view instanceof FrameLayout) {
+            view = new FrameLayoutStyler(this, context).style(view, attributes);
         }
 
         view = new CustomViewStyler(this, context).style(view, attributes);

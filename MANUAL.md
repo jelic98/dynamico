@@ -11,6 +11,8 @@
 * Supported attributes
     * View
     * LinearLayout
+    * FrameLayout
+    * ScrollView
     * TextView
     * EditText
     * ImageView
@@ -20,6 +22,7 @@
     * RadioButton
     * Switch
     * ToggleButton
+    * GridView
 
 ### Single view
 
@@ -227,6 +230,35 @@ Inherits everything from View.
 }
 ``` 
 
+#### FrameLayout
+
+Inherits everything from View.
+
+```json
+{  
+  "class":"android.widget.FrameLayout",
+  "attributes":{
+    "measureAllChildren":"true | false",
+    "foregroundGravity":"START | END | TOP | BOTTOM | CENTER | CENTER_HORIZONTAL | CENTER_VERTICAL"
+  }
+}
+```
+
+#### ScrollView
+
+Inherits everything from FrameLayout.
+
+```json
+{  
+  "class":"android.widget.ScrollView",
+  "attributes":{
+    "fillViewport":"true | false",
+    "smoothScrollingEnabled":"true | false",
+    "overScrollMode":"OVER_SCROLL_ALWAYS | OVER_SCROLL_NEVER | OVER_SCROLL_IF_CONTENT_SCROLLS"
+  }
+}
+``` 
+
 #### TextView
 
 Inherits everything from View.
@@ -331,6 +363,25 @@ Inherits everything from CompoundButton.
   "attributes":{
     "textOn":"string",
     "textOff":"string"
+  }
+}
+``` 
+
+#### GridView
+
+Inherits everything from View.
+
+```json
+{  
+  "class":"android.widget.GridView",
+  "attributes":{
+    "numColumns":"int",
+    "selection":"int",
+    "horizontalSpacing":"units",
+    "verticalSpacing":"units",
+    "columnWidth":"units",
+    "stretchMode":"NO_STRETCH | STRETCH_SPACING | STRETCH_COLUMN_WIDTH | STRETCH_SPACING_UNIFORM",
+    "gravity":"START | END | TOP | BOTTOM | CENTER | CENTER_HORIZONTAL | CENTER_VERTICAL"
   }
 }
 ``` 
