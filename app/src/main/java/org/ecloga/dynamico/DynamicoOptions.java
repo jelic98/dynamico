@@ -3,10 +3,22 @@ package org.ecloga.dynamico;
 import java.util.Arrays;
 import java.util.EnumSet;
 
-class DynamicoOptions {
+public class DynamicoOptions {
 
+    /**
+     * Options that can be attached to Dynamico object
+     */
     public enum Option {
-        ONLY_CACHE
+        /**
+         * Force checking cache before fetching layout from server
+         */
+        ONLY_CACHE,
+
+        /**
+         * Fetch layout constantly
+         * Note: Pause between server requests is 30 seconds or use setAsyncPause(long millis)
+         */
+        NON_STOP
     }
 
     private EnumSet<Option> options;
@@ -18,5 +30,10 @@ class DynamicoOptions {
 
     public boolean isEnabled(Option option) {
         return options.contains(option);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }

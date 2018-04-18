@@ -9,6 +9,7 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 import org.ecloga.dynamico.Dynamico;
 import org.ecloga.dynamico.DynamicoException;
 import org.ecloga.dynamico.DynamicoListener;
+import org.ecloga.dynamico.DynamicoOptions;
 
 public class ActivityMain extends AppCompatActivity {
 
@@ -30,6 +31,8 @@ public class ActivityMain extends AppCompatActivity {
                             // notify user
                         }
                     })
+                    .setOptions(DynamicoOptions.Option.NON_STOP)
+                    .setAsyncPause(5000)
                     .initialize();
         }catch(DynamicoException e) {
             finish();

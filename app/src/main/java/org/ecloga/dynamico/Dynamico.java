@@ -1,11 +1,15 @@
 package org.ecloga.dynamico;
 
+import android.os.Looper;
 import android.view.ViewGroup;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public final class Dynamico {
 
     private static final String TAG = "Dynamico";
 
+    private long asyncPause = 30 * 1000;
     private DynamicoLayoutLoader loader;
     private DynamicoOptions options;
 
@@ -48,15 +52,41 @@ public final class Dynamico {
     }
 
     /**
+     * Overrides default asyncPause (30 seconds)
+     * Note: NON_STOP option must be enabled
+     * @param millis asynchronous call pause in milliseconds
+     * @return Dynamico object ready for initialization
+     */
+    public Dynamico setAsyncPause(long millis) {
+        this.asyncPause = millis;
+
+        return this;
+    }
+
+    /**
      * Starts layout fetching from cache/server depending on provided options
      */
     public void initialize() {
         Util.log(TAG, "Device information: " + Device.getAllInfo());
+        Util.log(TAG, "Dynamico options: " + options);
 
-        if(options.isEnabled(DynamicoOptions.Option.ONLY_CACHE)) {
-            loader.loadLayoutFromCache();
-        }else {
-            loader.loadLayoutFromServer();
-        }
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                if(Looper.myLooper() == null) {
+                    Looper.prepare();
+                }
+
+                if(options.isEnabled(DynamicoOptions.Option.ONLY_CACHE)) {
+                    loader.loadLayoutFromCache();
+                }else {
+                    loader.loadLayoutFromServer();
+                }
+
+                if(!options.isEnabled(DynamicoOptions.Option.NON_STOP)) {
+                    this.cancel();
+                }
+            }
+        }, 0, asyncPause);
     }
 }

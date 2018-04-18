@@ -110,6 +110,12 @@ setListener(new LayoutStateListener() {
 setOptions(CACHE_ONLY)
 ```
 
+* Non-stop layout fetching
+
+```java
+setOptions(NON_STOP) // use with setAsyncPause(long millis)
+```
+
 ## Supported views in 'android.widget'
 * EditText
 * TextView
@@ -150,7 +156,6 @@ Starts layout fetching from cache/server depending on provided options
 
 ## TODO
 * Support RelativeLayout
+* Add more views
 * Support vector drawables
-* Add usage details in MANUAL.md
-* Add replica of some poplar layout
-* Non-stop fetching option
+* Add usage details in MANUAL.md + layout replica

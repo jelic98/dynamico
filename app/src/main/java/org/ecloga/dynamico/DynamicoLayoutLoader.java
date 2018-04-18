@@ -1,6 +1,9 @@
 package org.ecloga.dynamico;
 
+import android.app.Activity;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.ViewGroup;
 import org.ecloga.dynamico.network.ApiResponse;
 import org.ecloga.dynamico.network.FileDownload;
@@ -39,6 +42,8 @@ final class DynamicoLayoutLoader {
     public void loadLayoutFromServer() {
         Util.log(TAG, "Loading from server");
 
+        onPreLoad();
+
         new FileDownload(getDirectoryUrl(name), context, getStoragePath(name, context))
                 .addHandler(new ApiResponse() {
                     @Override
@@ -62,6 +67,8 @@ final class DynamicoLayoutLoader {
 
     public void loadLayoutFromCache() {
         Util.log(TAG, "Loading from cache");
+
+        onPreLoad();
 
         File file = new File(getStoragePath(name, context));
 
@@ -87,6 +94,15 @@ final class DynamicoLayoutLoader {
                 listener.onError(e.getMessage());
             }
         }
+    }
+
+    private void onPreLoad() {
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                layout.removeAllViews();
+            }
+        });
     }
 
     private void addViews(String content) {
