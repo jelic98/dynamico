@@ -26,7 +26,7 @@ class TextViewStyler extends DefaultStyler {
         }
 
         if(attributes.has("textSize")) {
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, Display.unitToPx(attributes.getString("textSize"), context));
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, Display.unitToPx(attributes.getString("textSize"), context));
         }
 
         if(attributes.has("textColor")) {

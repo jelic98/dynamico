@@ -5,7 +5,7 @@
 
 Android library for inflating dynamic layouts in runtime based on JSON configuration fetched from server. Useful in situations when layouts need to change without updating the app.
 
-## Advanced features 
+## Advanced features
 * Targeting specific devices by brand, model and Android API version
 * Layout changes based on configuration fields
 
@@ -84,6 +84,8 @@ new Dynamico("http://ecloga.org/dynamico",
     .initialize();
 ```
 
+Done. For advanced usage, take a look at this awesome [manual](https://github.com/jelic98/dynamico/blob/master/MANUAL.md).
+
 ## Additional features
 
 * Event listener
@@ -145,117 +147,6 @@ Attaches options to Dynamico object
 ###### `public void initialize()`
 
 Starts layout fetching from cache/server depending on provided options
-
-## Advanced JSON layout
-
-```json
-{
-  "targets": [
-    {
-      "key": "SDK",
-      "value": "25",
-      "views": [
-        {
-          "class": "android.widget.ImageView",
-          "attributes": {
-            "layout_width": "wrap_content",
-            "layout_height": "wrap_content",
-            "src": "http://ecloga.org/dynamico/logo.png",
-            "cache": true,
-            "clickable": true,
-            "onClick": {
-              "class": "org.ecloga.demo.ActivityMain",
-              "method": "onImageClick",
-              "parameters": [
-                {
-                  "type": "java.lang.String",
-                  "value": "Sample"
-                },
-                {
-                  "type": "java.lang.Integer",
-                  "value": 123
-                },
-                {
-                  "type": "android.content.Context",
-                  "value": "Whatever"
-                }
-              ]
-            }
-          }
-        }
-      ]
-    }
-  ],
-  "default": {
-    "views": [
-      {
-        "class": "android.widget.TextView",
-        "attributes": {
-          "layout_width": "match_parent",
-          "layout_height": "wrap_content",
-          "layout_gravity": "end",
-          "layout_margin": "50dp",
-          "paddingStart": "10dp",
-          "paddingTop": "15dp",
-          "background": "#2980b9",
-          "gravity": "center",
-          "text": "This is working!",
-          "textSize": "16sp",
-          "conditions": [
-            {
-              "class": "org.ecloga.demo.AppConfig",
-              "field": "THEME",
-              "value": "red",
-              "attributes": {
-                "textColor": "#FF0000"
-              }
-            },
-            {
-              "class": "org.ecloga.demo.AppConfig",
-              "field": "THEME",
-              "value": "yellow",
-              "attributes": {
-                "textColor": "#FFFF00"
-              }
-            }
-          ]
-        }
-      },
-      {
-        "class": "android.widget.RelativeLayout",
-        "views": [
-          {
-            "class": "android.widget.TextView",
-            "attributes": {
-              "text": "Recursive addition",
-              "visibility": "visible"
-            }
-          }
-        ]
-      },
-      {
-        "class": "android.widget.Switch",
-        "attributes": {
-          "onCheck": {
-            "class": "org.ecloga.demo.ActivityMain",
-            "method": "onButtonCheck",
-            "parameters": [
-              {
-                "type": "java.lang.String",
-                "value": "The message"
-              },
-              {
-                "type": "android.content.Context",
-                "value": "Whatever"
-              }
-            ]
-          }
-        }
-      }
-    ]
-  }
-}
-```
 
 ## TODO
 * Support RelativeLayout, ConstraintLayout, Gridlayout, FrameLayout, etc.

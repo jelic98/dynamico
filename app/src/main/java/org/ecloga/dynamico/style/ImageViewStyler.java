@@ -30,7 +30,7 @@ final class ImageViewStyler extends DefaultStyler implements OnDrawableLoadedLis
 
         if(attributes.has("scaleType")) {
             try {
-                imageView.setScaleType(ImageView.ScaleType.valueOf(attributes.getString("scaleType").trim()));
+                imageView.setScaleType(ImageView.ScaleType.valueOf(attributes.getString("scaleType")));
             }catch(IllegalArgumentException e) {
                 Util.log("Style error", e.getMessage());
             }
