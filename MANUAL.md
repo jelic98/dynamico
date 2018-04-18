@@ -178,7 +178,7 @@
 
 ### Supported attributes
 
-##### View
+#### View
 
 ```json
 {  
@@ -190,11 +190,11 @@
 }
 ```
 
-##### LinearLayout
+#### LinearLayout
 
 Inherits everything from View.
 
-##### TextView
+#### TextView
 
 Inherits everything from View.
 
@@ -210,7 +210,7 @@ Inherits everything from View.
 }
 ```
 
-##### EditText
+#### EditText
 
 Inherits everything from TextView.
 
@@ -224,7 +224,7 @@ Inherits everything from TextView.
 }
 ```
 
-##### ImageView
+#### ImageView
 
 Inherits everything from View.
 
@@ -239,11 +239,11 @@ Inherits everything from View.
 }
 ```
 
-##### Button
+#### Button
 
 Inherits everything from View.
 
-##### CompoundButton
+#### CompoundButton
 
 Inherits everything from Button.
 
@@ -258,15 +258,15 @@ Inherits everything from Button.
 }
 ``` 
 
-##### CheckBox
+#### CheckBox
 
 Inherits everything from CompoundButton.
 
-##### RadioButton
+#### RadioButton
 
 Inherits everything from CompoundButton.
 
-##### Switch
+#### Switch
 
 Inherits everything from CompoundButton.
 
@@ -287,7 +287,7 @@ Inherits everything from CompoundButton.
 }
 ``` 
 
-##### ToggleButton
+#### ToggleButton
 
 Inherits everything from CompoundButton.
 
