@@ -1,28 +1,28 @@
 ## Content
 
-* Single view
-* Single layout
-* Multiple views
-* Recursive views
-* Device targeting
-* Configuration fields
-* Event listeners
-* Custom views
-* Supported attributes
-    * View
-    * LinearLayout
-    * FrameLayout
-    * ScrollView
-    * TextView
-    * EditText
-    * ImageView
-    * Button
-    * CompoundButton
-    * CheckBox
-    * RadioButton
-    * Switch
-    * ToggleButton
-    * GridView
+* [Single view](#single-view)
+* [Single layout](#single-layout)
+* [Multiple views](#multiple-views)
+* [Recursive views](#recursive-views)
+* [Device targeting](#device-targeting)
+* [Configuration fields](#configuration-fields)
+* [Event listeners](#event-listeners)
+* [Custom views](#custom-views)
+* [Supported attributes](#supported-attributes)
+    * [View](#view)
+    * [LinearLayout](#linearlayout)
+    * [FrameLayout](#framelayout)
+    * [ScrollView](#scrollview)
+    * [TextView](#textview)
+    * [EditText](#edittext)
+    * [ImageView](#imageview)
+    * [Button](#button)
+    * [CompoundButton](#compoundbutton)
+    * [CheckBox](#checkbox)
+    * [RadioButton](#radiobutton)
+    * [Switch](#switch)
+    * [ToggleButton](#togglebutton)
+    * [GridView](#gridview)
 
 ### Single view
 
