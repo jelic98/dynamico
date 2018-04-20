@@ -1,10 +1,8 @@
 package org.ecloga.dynamico;
 
-import android.app.Activity;
 import android.content.Context;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import org.ecloga.dynamico.network.ApiResponse;
 import org.ecloga.dynamico.network.FileDownload;
 import org.ecloga.dynamico.style.ViewFactory;
@@ -42,8 +40,6 @@ final class DynamicoLayoutLoader {
     public void loadLayoutFromServer() {
         Util.log(TAG, "Loading from server");
 
-        onPreLoad();
-
         new FileDownload(getDirectoryUrl(name), context, getStoragePath(name, context))
                 .addHandler(new ApiResponse() {
                     @Override
@@ -67,8 +63,6 @@ final class DynamicoLayoutLoader {
 
     public void loadLayoutFromCache() {
         Util.log(TAG, "Loading from cache");
-
-        onPreLoad();
 
         File file = new File(getStoragePath(name, context));
 
@@ -96,17 +90,10 @@ final class DynamicoLayoutLoader {
         }
     }
 
-    private void onPreLoad() {
-        new Handler(Looper.getMainLooper()).post(new Runnable() {
-            @Override
-            public void run() {
-                layout.removeAllViews();
-            }
-        });
-    }
-
     private void addViews(String content) {
         ViewFactory factory = new ViewFactory(context);
+
+        ViewGroup wrapper = new LinearLayout(context);
 
         try {
             JSONObject obj = new JSONObject(content);
@@ -123,7 +110,7 @@ final class DynamicoLayoutLoader {
                     String targetValue = target.getString("value");
 
                     if(targetValue.equalsIgnoreCase(Device.getInfo(Device.Key.valueOf(targetKey)))) {
-                        factory.addViews(layout, target);
+                        factory.addViews(wrapper, target);
 
                         foundLayout = true;
 
@@ -132,11 +119,13 @@ final class DynamicoLayoutLoader {
                 }
 
                 if(!foundLayout && obj.has("default")) {
-                    factory.addViews(layout, obj.getJSONObject("default"));
+                    factory.addViews(wrapper, obj.getJSONObject("default"));
                 }
             }else {
-                factory.addViews(layout, obj);
+                factory.addViews(wrapper, obj);
             }
+
+            seamlessSwap(wrapper);
 
             if(listener != null) {
                 listener.onSuccess(content);
@@ -150,6 +139,10 @@ final class DynamicoLayoutLoader {
         }
     }
 
+    private void seamlessSwap(ViewGroup wrapper) {
+        layout.removeAllViews();
+        layout.addView(wrapper);
+    }
     private String getDirectoryUrl(String name) {
         return this.url + "/" + name;
     }

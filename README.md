@@ -157,6 +157,5 @@ Starts layout fetching from cache/server depending on provided options
 ## TODO
 * Support RelativeLayout
 * Add more views
-* Support vector drawables
-* Non-stop seamless layout clearing 
+* Support vector drawables 
 * Add usage details in MANUAL.md + layout replica
