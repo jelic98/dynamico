@@ -22,6 +22,9 @@ class Display {
             value = Integer.parseInt(dimension.replace(unit, ""));
         }catch(NumberFormatException e) {
             Util.log("Unit error", "Caused by dimension " + dimension + "\nDetails: " + e.getMessage());
+
+            e.printStackTrace();
+
             return 0;
         }
 

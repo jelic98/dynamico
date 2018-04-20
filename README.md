@@ -158,4 +158,5 @@ Starts layout fetching from cache/server depending on provided options
 * Support RelativeLayout
 * Add more views
 * Support vector drawables
+* Non-stop seamless layout clearing 
 * Add usage details in MANUAL.md + layout replica

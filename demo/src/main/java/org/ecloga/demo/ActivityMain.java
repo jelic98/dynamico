@@ -31,8 +31,6 @@ public class ActivityMain extends AppCompatActivity {
                             // notify user
                         }
                     })
-                    .setOptions(DynamicoOptions.Option.NON_STOP)
-                    .setAsyncPause(5000)
                     .initialize();
         }catch(DynamicoException e) {
             finish();
