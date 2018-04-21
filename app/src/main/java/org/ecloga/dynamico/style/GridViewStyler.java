@@ -7,7 +7,7 @@ import android.widget.GridView;
 import org.json.JSONObject;
 import static android.widget.GridView.*;
 
-final class GridViewStyler extends CompoundButtonStyler {
+final class GridViewStyler extends DefaultStyler {
 
     GridViewStyler(ViewFactory factory, Context context) {
         super(factory, context);

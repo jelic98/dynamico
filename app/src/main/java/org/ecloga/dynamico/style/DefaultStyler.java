@@ -2,10 +2,8 @@ package org.ecloga.dynamico.style;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import org.ecloga.dynamico.Util;
 import org.ecloga.dynamico.network.ApiResponse;
 import org.ecloga.dynamico.network.ImageDownload;
@@ -14,21 +12,17 @@ import org.json.JSONObject;
 
 class DefaultStyler implements Styler {
 
-    private ViewFactory factory;
+    private ViewFactory viewFactory;
     protected Context context;
 
-    DefaultStyler(ViewFactory factory, Context context) {
-        this.factory = factory;
+    DefaultStyler(ViewFactory viewFactory, Context context) {
+        this.viewFactory = viewFactory;
         this.context = context;
     }
 
     @Override
     public View style(final View view, JSONObject attributes) throws Exception {
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
-
-        if(params == null) {
-            params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        }
+        ViewGroup.MarginLayoutParams params = new ParamsFactory(view, attributes).getParams();
 
         if(attributes.has("layout_width")) {
             String width = attributes.getString("layout_width");
@@ -60,10 +54,6 @@ class DefaultStyler implements Styler {
 
         if(attributes.has("minHeight")) {
             view.setMinimumHeight(Display.unitToPx(attributes.getString("minHeight"), context));
-        }
-
-        if(attributes.has("layout_weight")) {
-            params.weight = (float) attributes.getDouble("layout_weight");
         }
 
         if(attributes.has("layout_margin")) {
@@ -100,26 +90,6 @@ class DefaultStyler implements Styler {
 
             if(hasMargin) {
                 params.setMargins(start, top, end, bottom);
-            }
-        }
-
-        if(attributes.has("layout_gravity")) {
-            String gravity = attributes.getString("layout_gravity");
-
-            if(gravity.equalsIgnoreCase("start")) {
-                params.gravity = Gravity.START;
-            }else if(gravity.equalsIgnoreCase("top")) {
-                params.gravity = Gravity.TOP;
-            }else if(gravity.equalsIgnoreCase("end")) {
-                params.gravity = Gravity.END;
-            }else if(gravity.equalsIgnoreCase("bottom")) {
-                params.gravity = Gravity.BOTTOM;
-            }else if(gravity.equalsIgnoreCase("center")) {
-                params.gravity = Gravity.CENTER;
-            }else if(gravity.equalsIgnoreCase("center_horizontal")) {
-                params.gravity = Gravity.CENTER_HORIZONTAL;
-            }else if(gravity.equalsIgnoreCase("center_vertical")) {
-                params.gravity = Gravity.CENTER_VERTICAL;
             }
         }
 
@@ -277,7 +247,7 @@ class DefaultStyler implements Styler {
                 String value = config.getDeclaredField(condition.getString("field")).get(config).toString();
 
                 if(value.equalsIgnoreCase(condition.getString("value"))) {
-                    conditionView = factory.styleView(view, condition.getJSONObject("attributes"));
+                    conditionView = viewFactory.styleView(view, condition.getJSONObject("attributes"));
                 }
             }
 

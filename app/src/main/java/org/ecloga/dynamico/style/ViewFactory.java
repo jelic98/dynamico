@@ -26,7 +26,7 @@ public final class ViewFactory {
 
         for(int i = 0; i < views.length(); i++) {
             try {
-                layout.addView(getView(views.getJSONObject(i)));
+                layout.addView(getView(views.getJSONObject(i), layout.getClass()));
             }catch(Exception e) {
                 Util.log("View error", "Caused by JSON object at index " + i + "\nDetails: " + e.getMessage());
                 e.printStackTrace();
@@ -36,7 +36,7 @@ public final class ViewFactory {
         return layout;
     }
 
-    private View getView(JSONObject object) throws Exception {
+    private View getView(JSONObject object, Class parentClass) throws Exception {
         View view = createView(object.getString("class"));
 
         if(object.has("views")) {
@@ -44,7 +44,7 @@ public final class ViewFactory {
         }
 
         if(object.has("attributes")) {
-            view = styleView(view, object.getJSONObject("attributes"));
+            view = styleView(view, object.getJSONObject("attributes").put("parent_class", parentClass));
         }
 
         return view;
@@ -77,6 +77,8 @@ public final class ViewFactory {
             view = new ImageViewStyler(this, context).style(view, attributes);
         }else if(view instanceof LinearLayout) {
             view = new LinearLayoutStyler(this, context).style(view, attributes);
+        }else if(view instanceof GridView) {
+            view = new GridViewStyler(this, context).style(view, attributes);
         }else if(view instanceof ScrollView) {
             view = new ScrollViewStyler(this, context).style(view, attributes);
         }else if(view instanceof FrameLayout) {

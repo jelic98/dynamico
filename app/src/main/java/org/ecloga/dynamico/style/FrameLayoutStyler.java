@@ -4,11 +4,12 @@ import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.ToggleButton;
 import org.json.JSONObject;
 
-final class FrameLayoutStyler extends CompoundButtonStyler {
+class FrameLayoutStyler extends DefaultStyler {
 
     FrameLayoutStyler(ViewFactory factory, Context context) {
         super(factory, context);

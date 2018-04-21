@@ -93,7 +93,7 @@ final class DynamicoLayoutLoader {
     private void addViews(String content) {
         ViewFactory factory = new ViewFactory(context);
 
-        ViewGroup wrapper = new LinearLayout(context);
+        layout.removeAllViews();
 
         try {
             JSONObject obj = new JSONObject(content);
@@ -110,7 +110,7 @@ final class DynamicoLayoutLoader {
                     String targetValue = target.getString("value");
 
                     if(targetValue.equalsIgnoreCase(Device.getInfo(Device.Key.valueOf(targetKey)))) {
-                        factory.addViews(wrapper, target);
+                        factory.addViews(layout, target);
 
                         foundLayout = true;
 
@@ -119,13 +119,11 @@ final class DynamicoLayoutLoader {
                 }
 
                 if(!foundLayout && obj.has("default")) {
-                    factory.addViews(wrapper, obj.getJSONObject("default"));
+                    factory.addViews(layout, obj.getJSONObject("default"));
                 }
             }else {
-                factory.addViews(wrapper, obj);
+                factory.addViews(layout, obj);
             }
-
-            seamlessSwap(wrapper);
 
             if(listener != null) {
                 listener.onSuccess(content);
@@ -139,10 +137,6 @@ final class DynamicoLayoutLoader {
         }
     }
 
-    private void seamlessSwap(ViewGroup wrapper) {
-        layout.removeAllViews();
-        layout.addView(wrapper);
-    }
     private String getDirectoryUrl(String name) {
         return this.url + "/" + name;
     }

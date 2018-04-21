@@ -116,14 +116,6 @@ setOptions(CACHE_ONLY)
 setOptions(NON_STOP) // use with setAsyncPause(long millis)
 ```
 
-## Supported views in 'android.widget'
-* EditText
-* TextView
-* ImageView
-* Button
-* CompoundButton (CheckBox, RadioButton, Switch, ToggleButton)
-* LinearLayout
-
 ## Documentation
 
 ###### `public Dynamico(String url, String name, ViewGroup layout) throws DynamicoException`
@@ -155,7 +147,9 @@ Attaches options to Dynamico object
 Starts layout fetching from cache/server depending on provided options
 
 ## TODO
-* Support RelativeLayout
+* Add RelativeLayoutStyler, FrameLayoutStyler, etc.
 * Add more views
+* More matchers in targeting like 'below', 'above', etc.
+* Support android:id
 * Support vector drawables 
-* Add usage details in MANUAL.md + layout replica
+* Add usage details in MANUAL

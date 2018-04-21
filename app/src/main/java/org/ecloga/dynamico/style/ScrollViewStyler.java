@@ -7,7 +7,7 @@ import android.widget.ScrollView;
 import android.widget.ToggleButton;
 import org.json.JSONObject;
 
-final class ScrollViewStyler extends CompoundButtonStyler {
+final class ScrollViewStyler extends FrameLayoutStyler {
 
     ScrollViewStyler(ViewFactory factory, Context context) {
         super(factory, context);
