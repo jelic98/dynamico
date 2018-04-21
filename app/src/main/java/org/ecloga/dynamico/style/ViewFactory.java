@@ -77,6 +77,10 @@ public final class ViewFactory {
             view = new ImageViewStyler(this, context).style(view, attributes);
         }else if(view instanceof LinearLayout) {
             view = new LinearLayoutStyler(this, context).style(view, attributes);
+        }else if(view instanceof RelativeLayout) {
+            view = new RelativeLayoutStyler(this, context).style(view, attributes);
+        }else if(view instanceof GridLayout) {
+            view = new GridLayoutStyler(this, context).style(view, attributes);
         }else if(view instanceof GridView) {
             view = new GridViewStyler(this, context).style(view, attributes);
         }else if(view instanceof ScrollView) {

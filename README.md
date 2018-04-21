@@ -147,8 +147,7 @@ Attaches options to Dynamico object
 Starts layout fetching from cache/server depending on provided options
 
 ## TODO
-* Add RelativeLayoutStyler, FrameLayoutStyler, etc.
-* Add more views
 * Support android:id
-* Support vector drawables 
+* Support vector drawables
+* Add more views
 * Add usage details in MANUAL

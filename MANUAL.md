@@ -11,7 +11,9 @@
 * [Supported attributes](#supported-attributes)
     * [View](#view)
     * [LinearLayout](#linearlayout)
+    * [RelativeLayout](#relativelayout)
     * [FrameLayout](#framelayout)
+    * [GridLayout](#gridlayout)
     * [ScrollView](#scrollview)
     * [TextView](#textview)
     * [EditText](#edittext)
@@ -231,6 +233,21 @@ Inherits everything from View.
 }
 ``` 
 
+#### RelativeLayout
+
+Inherits everything from View.
+
+```json
+{  
+  "class":"android.widget.RelativeLayout",
+  "attributes":{
+    "gravity":"START | END | TOP | BOTTOM | CENTER | CENTER_HORIZONTAL | CENTER_VERTICAL",
+    "horizontalGravity":"START | END | TOP | BOTTOM | CENTER | CENTER_HORIZONTAL | CENTER_VERTICAL",
+    "verticalGravity":"START | END | TOP | BOTTOM | CENTER | CENTER_HORIZONTAL | CENTER_VERTICAL"
+  }
+}
+``` 
+
 #### FrameLayout
 
 Inherits everything from View.
@@ -244,6 +261,23 @@ Inherits everything from View.
   }
 }
 ```
+
+#### GridLayout
+
+Inherits everything from View.
+
+```json
+{  
+  "class":"android.widget.GridLayout",
+  "attributes":{
+    "orientation":"vertical | horizontal",
+    "columnCount":"int",
+    "rowCount":"int",
+    "columnOrderPreserved":"true | false",
+    "rowOrderPreserved":"true | false"
+  }
+}
+``` 
 
 #### ScrollView
 
