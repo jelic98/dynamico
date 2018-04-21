@@ -4,6 +4,8 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import org.ecloga.dynamico.Util;
 import org.json.JSONObject;
 
 final class EditTextStyler extends TextViewStyler {
@@ -23,7 +25,11 @@ final class EditTextStyler extends TextViewStyler {
         }
 
         if(attributes.has("ellipsize")) {
-            editText.setEllipsize(TextUtils.TruncateAt.valueOf(attributes.getString("ellipsize")));
+            try {
+                editText.setEllipsize(TextUtils.TruncateAt.valueOf(attributes.getString("ellipsize")));
+            }catch(IllegalArgumentException e) {
+                Util.log("Style error", e.getMessage());
+            }
         }
 
         return editText;

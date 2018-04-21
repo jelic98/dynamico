@@ -149,7 +149,6 @@ Starts layout fetching from cache/server depending on provided options
 ## TODO
 * Add RelativeLayoutStyler, FrameLayoutStyler, etc.
 * Add more views
-* More matchers in targeting like 'below', 'above', etc.
 * Support android:id
 * Support vector drawables 
 * Add usage details in MANUAL

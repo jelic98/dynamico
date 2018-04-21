@@ -108,6 +108,7 @@
     {
       "key":"BRAND | MODEL | SDK",
       "value":"Samsung | SM-J330F | 27 | ...",
+      "matcher":"EQUAL | BELOW | ABOVE",
       "views": [
         ...
       ]

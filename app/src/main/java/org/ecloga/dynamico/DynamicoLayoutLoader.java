@@ -109,7 +109,13 @@ final class DynamicoLayoutLoader {
                     String targetKey = target.getString("key");
                     String targetValue = target.getString("value");
 
-                    if(targetValue.equalsIgnoreCase(Device.getInfo(Device.Key.valueOf(targetKey)))) {
+                    String matcher = null;
+
+                    if(target.has("matcher")) {
+                        matcher = target.getString("matcher");
+                    }
+
+                    if(Device.matches(targetKey, targetValue, matcher)) {
                         factory.addViews(layout, target);
 
                         foundLayout = true;
