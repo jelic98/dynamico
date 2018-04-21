@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import org.ecloga.dynamico.Util;
 import org.json.JSONObject;
 
 final class ParamsFactory {
@@ -95,6 +94,42 @@ final class ParamsFactory {
 
         if(attributes.has("align_parent_bottom") && attributes.getBoolean("align_parent_bottom")) {
             params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        }
+
+        if(attributes.has("layout_above")) {
+            params.addRule(RelativeLayout.ABOVE, attributes.getInt("layout_above"));
+        }
+
+        if(attributes.has("layout_below")) {
+            params.addRule(RelativeLayout.BELOW, attributes.getInt("layout_below"));
+        }
+
+        if(attributes.has("layout_alignStart")) {
+            params.addRule(RelativeLayout.ALIGN_START, attributes.getInt("layout_alignStart"));
+        }
+
+        if(attributes.has("layout_alignTop")) {
+            params.addRule(RelativeLayout.ALIGN_TOP, attributes.getInt("layout_alignTop"));
+        }
+
+        if(attributes.has("layout_alignEnd")) {
+            params.addRule(RelativeLayout.ALIGN_END, attributes.getInt("layout_alignEnd"));
+        }
+
+        if(attributes.has("layout_alignBottom")) {
+            params.addRule(RelativeLayout.ALIGN_BOTTOM, attributes.getInt("layout_alignBottom"));
+        }
+
+        if(attributes.has("layout_alignBaseline")) {
+            params.addRule(RelativeLayout.ALIGN_BASELINE, attributes.getInt("layout_alignBaseline"));
+        }
+
+        if(attributes.has("layout_toStartOf")) {
+            params.addRule(RelativeLayout.START_OF, attributes.getInt("layout_toStartOf"));
+        }
+
+        if(attributes.has("layout_toEndOf")) {
+            params.addRule(RelativeLayout.END_OF, attributes.getInt("layout_toEndOf"));
         }
 
         return params;

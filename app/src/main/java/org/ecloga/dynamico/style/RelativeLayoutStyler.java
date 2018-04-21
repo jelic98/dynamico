@@ -78,6 +78,10 @@ final class RelativeLayoutStyler extends ViewStyler {
             }
         }
 
+        if(attributes.has("ignoreGravity")) {
+            relativeLayout.setIgnoreGravity(attributes.getInt("ignoreGravity"));
+        }
+
         return relativeLayout;
     }
 }

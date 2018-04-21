@@ -3,7 +3,6 @@ package org.ecloga.dynamico.style;
 import android.content.Context;
 import android.view.View;
 import android.widget.GridLayout;
-import android.widget.LinearLayout;
 import org.json.JSONObject;
 
 final class GridLayoutStyler extends ViewStyler {
@@ -18,11 +17,21 @@ final class GridLayoutStyler extends ViewStyler {
 
         GridLayout gridLayout = (GridLayout) view;
 
+        if(attributes.has("alignmentMode")) {
+            String mode = attributes.getString("alignmentMode");
+
+            if(mode.equalsIgnoreCase("align_bounds")) {
+                gridLayout.setAlignmentMode(GridLayout.ALIGN_BOUNDS);
+            }else if(mode.equalsIgnoreCase("align_margins")) {
+                gridLayout.setAlignmentMode(GridLayout.ALIGN_MARGINS);
+            }
+        }
+
         if(attributes.has("orientation")) {
             String orientation = attributes.getString("orientation");
 
             if(orientation.equalsIgnoreCase("vertical")) {
-                gridLayout.setOrientation(LinearLayout.VERTICAL);
+                gridLayout.setOrientation(GridLayout.VERTICAL);
             }else if(orientation.equalsIgnoreCase("horizontal")) {
                 gridLayout.setOrientation(GridLayout.HORIZONTAL);
             }
@@ -42,6 +51,10 @@ final class GridLayoutStyler extends ViewStyler {
 
         if(attributes.has("rowOrderPreserved")) {
             gridLayout.setRowOrderPreserved(attributes.getBoolean("rowOrderPreserved"));
+        }
+
+        if(attributes.has("useDefaultMargins")) {
+            gridLayout.setUseDefaultMargins(attributes.getBoolean("useDefaultMargins"));
         }
 
         return gridLayout;

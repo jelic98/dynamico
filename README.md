@@ -147,7 +147,7 @@ Attaches options to Dynamico object
 Starts layout fetching from cache/server depending on provided options
 
 ## TODO
-* Support ID referencing
+* Support ID referencing for all views
 * Support vector drawables
 * Add more views
 * Add usage details in MANUAL

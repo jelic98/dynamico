@@ -231,20 +231,38 @@ Parent of all other views. Every view inherits attributes from this.
       "paddingEnd":"units",
       "paddingBottom":"units", 
       "visibility":"VISIBLE | INVISIBLE | GONE", 
-      "alpha":"double",
-      "rotation":"double", 
-      "rotationX":"double", 
-      "rotationY":"double", 
-      "translationX":"double", 
-      "translationY":"double", 
-      "scaleX":"double", 
-      "scaleY":"double", 
-      "pivotX":"double", 
-      "pivotY":"double", 
-      "x":"double", 
-      "y":"double", 
-      "clickable":"boolean", 
-      "background":"resource_url"
+      "alpha":"float",
+      "rotation":"float", 
+      "rotationX":"float", 
+      "rotationY":"float", 
+      "translationX":"float", 
+      "translationY":"float", 
+      "scaleX":"float", 
+      "scaleY":"float", 
+      "pivotX":"float", 
+      "pivotY":"float", 
+      "x":"float", 
+      "y":"float", 
+      "clickable":"true | false", 
+      "background":"resource_url",
+      "layout_weight":"float",
+      "layout_gravity":"START | END | TOP | BOTTOM | CENTER | CENTER_HORIZONTAL | CENTER_VERTICAL",
+      "center_horizontal":"true | false",
+      "center_vertical":"true | false",
+      "center_in_parent":"true | false",
+      "align_parent_start":"true | false",
+      "align_parent_top":"true | false",
+      "align_parent_end":"true | false",
+      "align_parent_bottom":"true | false",
+      "layout_above":"view_id",
+      "layout_below":"view_id",
+      "layout_alignStart":"view_id",
+      "layout_alignTop":"view_id",
+      "layout_alignEnd":"view_id",
+      "layout_alignBottom":"view_id",
+      "layout_alignBaseline":"view_id",
+      "layout_toStartOf":"view_id",
+      "layout_toEndOf":"view_id"
     }
 }
 ```
@@ -257,9 +275,17 @@ Inherits everything from View.
 {  
   "class":"android.widget.LinearLayout",
   "attributes":{
-    "orientation":"vertical | horizontal",
+    "orientation":"VERTICAL | HORIZONTAL",
     "weightSum":"float",
-    "gravity":"START | END | TOP | BOTTOM | CENTER | CENTER_HORIZONTAL | CENTER_VERTICAL"
+    "gravity":"START | END | TOP | BOTTOM | CENTER | CENTER_HORIZONTAL | CENTER_VERTICAL",
+    "horizontalGravity":"START | END | TOP | BOTTOM | CENTER | CENTER_HORIZONTAL | CENTER_VERTICAL",
+    "verticalGravity":"START | END | TOP | BOTTOM | CENTER | CENTER_HORIZONTAL | CENTER_VERTICAL",
+    "showDividers":"SHOW_DIVIDER_BEGINNING | SHOW_DIVIDER_MIDDLE | SHOW_DIVIDER_END | SHOW_DIVIDER_NONE",
+    "dividerDrawable":"resource_url",
+    "dividerPadding":"units",
+    "baselineAligned":"true | false",
+    "measureWithLargestChildEnabled":"true | false",
+    "baselineAlignedChildIndex":"int"
   }
 }
 ``` 
@@ -274,7 +300,8 @@ Inherits everything from View.
   "attributes":{
     "gravity":"START | END | TOP | BOTTOM | CENTER | CENTER_HORIZONTAL | CENTER_VERTICAL",
     "horizontalGravity":"START | END | TOP | BOTTOM | CENTER | CENTER_HORIZONTAL | CENTER_VERTICAL",
-    "verticalGravity":"START | END | TOP | BOTTOM | CENTER | CENTER_HORIZONTAL | CENTER_VERTICAL"
+    "verticalGravity":"START | END | TOP | BOTTOM | CENTER | CENTER_HORIZONTAL | CENTER_VERTICAL",
+    "ignoreGravity":"view_id"
   }
 }
 ``` 
@@ -301,11 +328,13 @@ Inherits everything from View.
 {  
   "class":"android.widget.GridLayout",
   "attributes":{
-    "orientation":"vertical | horizontal",
+    "alignmentMode":"ALIGN_BOUNDS | ALIGN_MARGINS",
+    "orientation":"VERTICAL | HORIZONTAL",
     "columnCount":"int",
-    "rowCount":"int",
+    "rowCount":"int", 
     "columnOrderPreserved":"true | false",
-    "rowOrderPreserved":"true | false"
+    "rowOrderPreserved":"true | false",
+    "useDefaultMargins":"true | false"
   }
 }
 ``` 

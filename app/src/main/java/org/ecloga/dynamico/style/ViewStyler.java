@@ -2,6 +2,7 @@ package org.ecloga.dynamico.style;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import org.ecloga.dynamico.Util;
@@ -208,19 +209,12 @@ class ViewStyler implements Styler {
             String background = attributes.getString("background");
 
             if(Util.isValidURL(background)) {
-                final ImageDownload request = new ImageDownload(background, context);
-                request.addHandler(new ApiResponse() {
+                new DrawableLoader(attributes, new OnDrawableLoadedListener() {
                     @Override
-                    public void onSuccess(String response) {
-                        view.setBackground(request.getDrawable());
+                    public void onDrawableLoaded(Drawable drawable, int requestCode) {
+                        view.setBackground(drawable);
                     }
-
-                    @Override
-                    public void onError(String message) {
-                        Util.log("Image error", "Setting image as a background produced the following error: " + message);
-                    }
-                });
-                request.start();
+                }, context).load(background, 0);
             }else if(Util.isValidColor(background)) {
                 try {
                     view.setBackgroundColor(Color.parseColor(background));

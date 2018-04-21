@@ -2,7 +2,6 @@ package org.ecloga.dynamico;
 
 import android.content.Context;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import org.ecloga.dynamico.network.ApiResponse;
 import org.ecloga.dynamico.network.FileDownload;
 import org.ecloga.dynamico.style.ViewFactory;
