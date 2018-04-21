@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import org.json.JSONObject;
 
-final class RelativeLayoutStyler extends DefaultStyler {
+final class RelativeLayoutStyler extends ViewStyler {
 
     RelativeLayoutStyler(ViewFactory factory, Context context) {
         super(factory, context);

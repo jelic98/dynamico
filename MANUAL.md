@@ -208,12 +208,43 @@
 
 #### View
 
+Parent of all other views. Every view inherits attributes from this.
+
 ```json
 {  
   "class":"android.widget.View",
   "attributes":{
+      "id":"int",
+      "tag":"string",
       "layout_width":"units | wrap_content | match_parent",
-      "layout_height":"units | wrap_content | match_parent"
+      "layout_height":"units | wrap_content | match_parent",
+      "minWidth":"units",
+      "minHeight":"units",
+      "layout_margin":"units",
+      "layout_marginStart":"units",
+      "layout_marginTop":"units",
+      "layout_marginEnd":"units",
+      "layout_marginBottom":"units", 
+      "padding":"units",
+      "paddingStart":"units", 
+      "paddingTop":"units", 
+      "paddingEnd":"units",
+      "paddingBottom":"units", 
+      "visibility":"VISIBLE | INVISIBLE | GONE", 
+      "alpha":"double",
+      "rotation":"double", 
+      "rotationX":"double", 
+      "rotationY":"double", 
+      "translationX":"double", 
+      "translationY":"double", 
+      "scaleX":"double", 
+      "scaleY":"double", 
+      "pivotX":"double", 
+      "pivotY":"double", 
+      "x":"double", 
+      "y":"double", 
+      "clickable":"boolean", 
+      "background":"resource_url"
     }
 }
 ```

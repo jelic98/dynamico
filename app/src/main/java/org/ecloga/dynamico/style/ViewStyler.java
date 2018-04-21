@@ -10,12 +10,12 @@ import org.ecloga.dynamico.network.ImageDownload;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-class DefaultStyler implements Styler {
+class ViewStyler implements Styler {
 
     private ViewFactory viewFactory;
     protected Context context;
 
-    DefaultStyler(ViewFactory viewFactory, Context context) {
+    ViewStyler(ViewFactory viewFactory, Context context) {
         this.viewFactory = viewFactory;
         this.context = context;
     }
@@ -23,6 +23,14 @@ class DefaultStyler implements Styler {
     @Override
     public View style(final View view, JSONObject attributes) throws Exception {
         ViewGroup.MarginLayoutParams params = new ParamsFactory(view, attributes).getParams();
+
+        if(attributes.has("id")) {
+            view.setId(attributes.getInt("id"));
+        }
+
+        if(attributes.has("tag")) {
+            view.setTag(attributes.getString("tag"));
+        }
 
         if(attributes.has("layout_width")) {
             String width = attributes.getString("layout_width");

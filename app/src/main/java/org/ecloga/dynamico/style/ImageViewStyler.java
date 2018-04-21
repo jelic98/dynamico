@@ -7,7 +7,7 @@ import android.widget.ImageView;
 import org.ecloga.dynamico.Util;
 import org.json.JSONObject;
 
-final class ImageViewStyler extends DefaultStyler implements OnDrawableLoadedListener {
+final class ImageViewStyler extends ViewStyler implements OnDrawableLoadedListener {
 
     private static final int LOAD_SRC = 1;
 

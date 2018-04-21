@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import org.json.JSONObject;
 
-final class LinearLayoutStyler extends DefaultStyler {
+final class LinearLayoutStyler extends ViewStyler {
 
     LinearLayoutStyler(ViewFactory factory, Context context) {
         super(factory, context);

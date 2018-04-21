@@ -10,7 +10,7 @@ import android.widget.TextView;
 import org.ecloga.dynamico.Util;
 import org.json.JSONObject;
 
-class TextViewStyler extends DefaultStyler {
+class TextViewStyler extends ViewStyler {
 
     TextViewStyler(ViewFactory factory, Context context) {
         super(factory, context);

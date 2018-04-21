@@ -6,7 +6,7 @@ import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import org.json.JSONObject;
 
-final class GridLayoutStyler extends DefaultStyler {
+final class GridLayoutStyler extends ViewStyler {
 
     GridLayoutStyler(ViewFactory factory, Context context) {
         super(factory, context);

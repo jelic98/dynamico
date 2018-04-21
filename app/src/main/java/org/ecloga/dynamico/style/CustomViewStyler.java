@@ -2,11 +2,10 @@ package org.ecloga.dynamico.style;
 
 import android.content.Context;
 import android.view.View;
-import org.ecloga.dynamico.Util;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-final class CustomViewStyler extends DefaultStyler {
+final class CustomViewStyler extends ViewStyler {
 
     CustomViewStyler(ViewFactory factory, Context context) {
         super(factory, context);
