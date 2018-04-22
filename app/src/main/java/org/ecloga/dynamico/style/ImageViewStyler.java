@@ -1,13 +1,11 @@
 package org.ecloga.dynamico.style;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.View;
-import android.widget.GridLayout;
 import android.widget.ImageView;
 import org.ecloga.dynamico.Util;
 import org.json.JSONObject;

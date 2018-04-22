@@ -69,8 +69,6 @@ public final class ViewFactory {
             view = new ToggleButtonStyler(this, context).style(view, attributes);
         }else if(view instanceof CompoundButton) {
             view = new CompoundButtonStyler(this, context).style(view, attributes);
-        }else if(view instanceof EditText) {
-            view = new EditTextStyler(this, context).style(view, attributes);
         }else if(view instanceof TextView) {
             view = new TextViewStyler(this, context).style(view, attributes);
         }else if(view instanceof ImageView) {

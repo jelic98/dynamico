@@ -149,5 +149,4 @@ Starts layout fetching from cache/server depending on provided options
 ## TODO
 * Support ID referencing for all views
 * Support vector drawables
-* Add more views
-* Add usage details in MANUAL
+* Support more views

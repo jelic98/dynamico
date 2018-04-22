@@ -366,19 +366,7 @@ Inherits everything from View.
     "textSize":"units",
     "textColor":"hex_value | color_name",
     "textStyle":"NORMAL | BOLD | ITALIC | BOLD_ITALIC",    
-    "gravity":"START | END | TOP | BOTTOM | CENTER | CENTER_HORIZONTAL | CENTER_VERTICAL"
-  }
-}
-```
-
-#### EditText
-
-Inherits everything from TextView.
-
-```json
-{  
-  "class":"android.widget.EditText",
-  "attributes":{  
+    "gravity":"START | END | TOP | BOTTOM | CENTER | CENTER_HORIZONTAL | CENTER_VERTICAL",
     "ellipsize":"START | MIDDLE | END | MARQUEE | END_SMALL",
     "hint":"string"
   }
