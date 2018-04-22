@@ -17,7 +17,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 import org.ecloga.dynamico.Util;
 import org.json.JSONObject;
-
 import java.util.Locale;
 
 class TextViewStyler extends ViewStyler {

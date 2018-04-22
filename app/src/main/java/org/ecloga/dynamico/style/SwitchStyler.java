@@ -1,10 +1,12 @@
 package org.ecloga.dynamico.style;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.View;
 import android.widget.Switch;
+import org.ecloga.dynamico.Util;
 import org.json.JSONObject;
 
 final class SwitchStyler extends CompoundButtonStyler {
@@ -61,6 +63,24 @@ final class SwitchStyler extends CompoundButtonStyler {
 
             if(attributes.has("splitTrack")) {
                 switchButton.setSplitTrack(attributes.getBoolean("splitTrack"));
+            }
+        }
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if(attributes.has("thumbTintMode")) {
+                try {
+                    switchButton.setThumbTintMode(PorterDuff.Mode.valueOf(attributes.getString("thumbTintMode")));
+                }catch(IllegalArgumentException e) {
+                    Util.log("Style error", e.getMessage());
+                }
+            }
+
+            if(attributes.has("trackTintMode")) {
+                try {
+                    switchButton.setTrackTintMode(PorterDuff.Mode.valueOf(attributes.getString("trackTintMode")));
+                }catch(IllegalArgumentException e) {
+                    Util.log("Style error", e.getMessage());
+                }
             }
         }
 
