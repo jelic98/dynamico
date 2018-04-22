@@ -364,7 +364,7 @@ Inherits everything from View.
   "attributes":{
     "text":"string",
     "textSize":"units",
-    "textColor":"hex_value",
+    "textColor":"hex_value | color_name",
     "textStyle":"NORMAL | BOLD | ITALIC | BOLD_ITALIC",    
     "gravity":"START | END | TOP | BOTTOM | CENTER | CENTER_HORIZONTAL | CENTER_VERTICAL"
   }
@@ -395,7 +395,18 @@ Inherits everything from View.
   "attributes":{
     "src":"resource_url",
     "cache":"true | false",
-    "scaleType":"MATRIX | FIT_XY | FIT_START | FIT_CENTER | FIT_END | CENTER | CENTER_CROP | CENTER_INSIDE"  
+    "scaleType":"MATRIX | FIT_XY | FIT_START | FIT_CENTER | FIT_END | CENTER | CENTER_CROP | CENTER_INSIDE",
+    "adjustViewBounds":"true | false",
+    "maxWidth":"units",
+    "maxHeight":"units",
+    "baseline":"units",
+    "baselineAlignBottom":"true | false",
+    "cropToPadding":"true | false",
+    "selected":"true | false",
+    "imageAlpha":"int",
+    "imageLevel":"int",
+    "colorFilter":"hex_value | color_name",
+    "imageTintMode":"CLEAR | SRC | DST | SRC_OVER | DST_OVER | SRC_IN | DST_IN | SRC_OUT | DST_OUT | SRC_ATOP | DST_ATOP | XOR | DARKEN | LIGHTEN | MULTIPLY | SCREEN | ADD | OVERLAY"
   }
 }
 ```
