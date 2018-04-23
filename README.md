@@ -26,7 +26,7 @@ allprojects {
 
 ```gradle
 dependencies {
-    compile 'com.github.jelic98:dynamico:1.1.0'
+    compile 'com.github.jelic98:dynamico:1.2.0'
 }
 ```
 
