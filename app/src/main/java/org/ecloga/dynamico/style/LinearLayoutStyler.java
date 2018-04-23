@@ -2,6 +2,7 @@ package org.ecloga.dynamico.style;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -119,7 +120,17 @@ final class LinearLayoutStyler extends ViewStyler implements OnDrawableLoadedLis
         }
 
         if(attributes.has("showDividers")) {
-            linearLayout.setShowDividers(attributes.getInt("showDividers"));
+            String dividers = attributes.getString("showDividers");
+
+            if(dividers.equalsIgnoreCase("beginning")) {
+                linearLayout.setShowDividers(LinearLayout.SHOW_DIVIDER_BEGINNING);
+            }else if(dividers.equalsIgnoreCase("middle")) {
+                linearLayout.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
+            }else if(dividers.equalsIgnoreCase("end")) {
+                linearLayout.setShowDividers(LinearLayout.SHOW_DIVIDER_END);
+            }else if(dividers.equalsIgnoreCase("none")) {
+                linearLayout.setShowDividers(LinearLayout.SHOW_DIVIDER_NONE);
+            }
         }
 
         return linearLayout;

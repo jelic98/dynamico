@@ -30,11 +30,11 @@ final class ScrollViewStyler extends FrameLayoutStyler {
         if(attributes.has("overScrollMode")) {
             String mode = attributes.getString("overScrollMode");
 
-            if(mode.equalsIgnoreCase("over_scroll_always")) {
+            if(mode.equalsIgnoreCase("always")) {
                 scrollView.setOverScrollMode(ScrollView.OVER_SCROLL_ALWAYS);
-            }else if(mode.equalsIgnoreCase("over_scroll_never")) {
+            }else if(mode.equalsIgnoreCase("never")) {
                 scrollView.setOverScrollMode(ScrollView.OVER_SCROLL_NEVER);
-            }else if(mode.equalsIgnoreCase("over_scroll_if_content_scrolls")) {
+            }else if(mode.equalsIgnoreCase("if_content_scrolls")) {
                 scrollView.setOverScrollMode(ScrollView.OVER_SCROLL_IF_CONTENT_SCROLLS);
             }
         }

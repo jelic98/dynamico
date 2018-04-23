@@ -1,9 +1,12 @@
 package org.ecloga.dynamico.style;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.view.View;
 import android.widget.CompoundButton;
+import org.ecloga.dynamico.Util;
 import org.json.JSONObject;
 
 class CompoundButtonStyler extends TextViewStyler implements OnDrawableLoadedListener {
@@ -43,6 +46,16 @@ class CompoundButtonStyler extends TextViewStyler implements OnDrawableLoadedLis
                     invoker.invoke(isChecked);
                 }
             });
+        }
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            if(attributes.has("buttonTintMode")) {
+                try {
+                    compoundButton.setButtonTintMode(PorterDuff.Mode.valueOf(attributes.getString("buttonTintMode")));
+                }catch(IllegalArgumentException e) {
+                    Util.log("Style error", e.getMessage());
+                }
+            }
         }
 
         return compoundButton;

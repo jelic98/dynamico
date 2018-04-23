@@ -7,6 +7,7 @@
 * [Device targeting](#device-targeting)
 * [Configuration fields](#configuration-fields)
 * [Event listeners](#event-listeners)
+* [Resource caching](#resource-caching)
 * [Custom views](#custom-views)
 * [Supported attributes](#supported-attributes)
     * [View](#view)
@@ -183,6 +184,17 @@
 }
 ```
 
+### Resource caching
+
+```json
+{  
+  "class":"android.widget.ImageView",
+  "attributes":{  
+    "cache":"TRUE | FALSE"
+   }
+}
+```
+
 ### Custom views
 
 ```json
@@ -243,17 +255,19 @@ Parent of all other views. Every view inherits attributes from this.
       "pivotY":"float", 
       "x":"float", 
       "y":"float", 
-      "clickable":"true | false", 
+      "clickable":"TRUE | FALSE", 
       "background":"resource_url",
+      "onClick":"event_listener",
+      "conditions":"device_targets",
       "layout_weight":"float",
       "layout_gravity":"START | END | TOP | BOTTOM | CENTER | CENTER_HORIZONTAL | CENTER_VERTICAL",
-      "center_horizontal":"true | false",
-      "center_vertical":"true | false",
-      "center_in_parent":"true | false",
-      "align_parent_start":"true | false",
-      "align_parent_top":"true | false",
-      "align_parent_end":"true | false",
-      "align_parent_bottom":"true | false",
+      "center_horizontal":"TRUE | FALSE",
+      "center_vertical":"TRUE | FALSE",
+      "center_in_parent":"TRUE | FALSE",
+      "align_parent_start":"TRUE | FALSE",
+      "align_parent_top":"TRUE | FALSE",
+      "align_parent_end":"TRUE | FALSE",
+      "align_parent_bottom":"TRUE | FALSE",
       "layout_above":"view_id",
       "layout_below":"view_id",
       "layout_alignStart":"view_id",
@@ -262,7 +276,7 @@ Parent of all other views. Every view inherits attributes from this.
       "layout_alignBottom":"view_id",
       "layout_alignBaseline":"view_id",
       "layout_toStartOf":"view_id",
-      "layout_toEndOf":"view_id"
+      "layout_toEndOf":"view_id",
     }
 }
 ```
@@ -280,11 +294,11 @@ Inherits everything from View.
     "gravity":"START | END | TOP | BOTTOM | CENTER | CENTER_HORIZONTAL | CENTER_VERTICAL",
     "horizontalGravity":"START | END | TOP | BOTTOM | CENTER | CENTER_HORIZONTAL | CENTER_VERTICAL",
     "verticalGravity":"START | END | TOP | BOTTOM | CENTER | CENTER_HORIZONTAL | CENTER_VERTICAL",
-    "showDividers":"SHOW_DIVIDER_BEGINNING | SHOW_DIVIDER_MIDDLE | SHOW_DIVIDER_END | SHOW_DIVIDER_NONE",
+    "showDividers":"BEGINNING | MIDDLE | END | NONE",
     "dividerDrawable":"resource_url",
     "dividerPadding":"units",
-    "baselineAligned":"true | false",
-    "measureWithLargestChildEnabled":"true | false",
+    "baselineAligned":"TRUE | FALSE",
+    "measureWithLargestChildEnabled":"TRUE | FALSE",
     "baselineAlignedChildIndex":"int"
   }
 }
@@ -314,7 +328,7 @@ Inherits everything from View.
 {  
   "class":"android.widget.FrameLayout",
   "attributes":{
-    "measureAllChildren":"true | false",
+    "measureAllChildren":"TRUE | FALSE",
     "foregroundGravity":"START | END | TOP | BOTTOM | CENTER | CENTER_HORIZONTAL | CENTER_VERTICAL"
   }
 }
@@ -332,9 +346,9 @@ Inherits everything from View.
     "orientation":"VERTICAL | HORIZONTAL",
     "columnCount":"int",
     "rowCount":"int", 
-    "columnOrderPreserved":"true | false",
-    "rowOrderPreserved":"true | false",
-    "useDefaultMargins":"true | false"
+    "columnOrderPreserved":"TRUE | FALSE",
+    "rowOrderPreserved":"TRUE | FALSE",
+    "useDefaultMargins":"TRUE | FALSE"
   }
 }
 ``` 
@@ -347,9 +361,9 @@ Inherits everything from FrameLayout.
 {  
   "class":"android.widget.ScrollView",
   "attributes":{
-    "fillViewport":"true | false",
-    "smoothScrollingEnabled":"true | false",
-    "overScrollMode":"OVER_SCROLL_ALWAYS | OVER_SCROLL_NEVER | OVER_SCROLL_IF_CONTENT_SCROLLS"
+    "fillViewport":"TRUE | FALSE",
+    "smoothScrollingEnabled":"TRUE | FALSE",
+    "overScrollMode":"ALWAYS | NEVER | IF_CONTENT_SCROLLS"
   }
 }
 ``` 
@@ -363,15 +377,66 @@ Inherits everything from View.
   "class":"android.widget.TextView",
   "attributes":{
     "text":"string",
+    "error":"string",
+    "hint":"string",
+    "textKeepState":"string",
     "textSize":"units",
     "textColor":"hex_value | color_name",
+    "hintTextColor":"hex_value | color_name",
+    "linkTextColor":"hex_value | color_name",
+    "highlightColor":"hex_value | color_name",
+    "singleLine":"TRUE | FALSE",
     "textStyle":"NORMAL | BOLD | ITALIC | BOLD_ITALIC",    
     "gravity":"START | END | TOP | BOTTOM | CENTER | CENTER_HORIZONTAL | CENTER_VERTICAL",
     "ellipsize":"START | MIDDLE | END | MARQUEE | END_SMALL",
-    "hint":"string"
-  }
+    "allCaps":"TRUE | FALSE",
+    "cursorVisible":"TRUE | FALSE",
+    "enabled":"TRUE | FALSE",
+    "freezesText":"TRUE | FALSE",
+    "horizontallyScrolling":"TRUE | FALSE",
+    "includeFontPadding":"TRUE | FALSE",
+    "linksClickable":"TRUE | FALSE",
+    "selectAllOnFocus":"TRUE | FALSE",
+    "selected":"TRUE | FALSE",
+    "textIsSelectable":"TRUE | FALSE",
+    "privateImeOptions":"string",
+    "textScaleX":"float",
+    "width":"units",
+    "maxWidth":"units",
+    "minWidth":"units",
+    "height":"units",
+    "maxHeight":"units",
+    "minHeight":"units",
+    "lines":"int",
+    "maxLines":"int",
+    "minLines":"int",
+    "ems":"int",
+    "maxEms":"int",
+    "minEms":"int",
+    "compoundDrawablePadding":"units",
+    "onKey":"event_listener",
+    "textLocale":"ENGLISH | FRENCH | GERMAN | ITALIAN | JAPANESE | KOREAN | CHINESE | SIMPLIFIED_CHINESE | TRADITIONAL_CHINESE | FRANCE | GERMANY | ITALY | JAPAN | KOREA | UK | US | CANADA | CANADA_FRENCH",
+    "imeOptions":"DONE | GO | NEXT | NONE | PREVIOUS | SEARCH | SEND | UNSPECIFIED",
+    "inputType":"CLASS_TEXT | CLASS_DATETIME | CLASS_NUMBER | CLASS_PHONE | DATETIME_VARIATION_DATE | DATETIME_VARIATION_NORMAL | DATETIME_VARIATION_TIME | MASK_CLASS | MASK_FLAGS | MASK_VARIATION | NULL | NUMBER_FLAG_DECIMAL | NUMBER_FLAG_SIGNED | NUMBER_VARIATION_NORMAL | NUMBER_VARIATION_PASSWORD | TEXT_FLAG_AUTO_COMPLETE | TEXT_FLAG_AUTO_CORRECT | TEXT_FLAG_CAP_CHARACTERS | TEXT_FLAG_CAP_SENTENCES | TEXT_FLAG_CAP_WORDS | TEXT_FLAG_IME_MULTI_LINE | TEXT_FLAG_MULTI_LINE | TEXT_FLAG_NO_SUGGESTIONS | TEXT_VARIATION_EMAIL_ADDRESS | TEXT_VARIATION_EMAIL_SUBJECT | TEXT_VARIATION_FILTER | TEXT_VARIATION_LONG_MESSAGE | TEXT_VARIATION_NORMAL | TEXT_VARIATION_PASSWORD | TEXT_VARIATION_PERSON_NAME | TEXT_VARIATION_PHONETIC | TEXT_VARIATION_POSTAL_ADDRESS | TEXT_VARIATION_SHORT_MESSAGE | TEXT_VARIATION_URI | TEXT_VARIATION_VISIBLE_PASSWORD | TEXT_VARIATION_WEB_EDIT_TEXT | TEXT_VARIATION_WEB_EMAIL_ADDRESS | TEXT_VARIATION_WEB_PASSWORD",
+    "rawInputType":"CLASS_TEXT | CLASS_DATETIME | CLASS_NUMBER | CLASS_PHONE | DATETIME_VARIATION_DATE | DATETIME_VARIATION_NORMAL | DATETIME_VARIATION_TIME | MASK_CLASS | MASK_FLAGS | MASK_VARIATION | NULL | NUMBER_FLAG_DECIMAL | NUMBER_FLAG_SIGNED | NUMBER_VARIATION_NORMAL | NUMBER_VARIATION_PASSWORD | TEXT_FLAG_AUTO_COMPLETE | TEXT_FLAG_AUTO_CORRECT | TEXT_FLAG_CAP_CHARACTERS | TEXT_FLAG_CAP_SENTENCES | TEXT_FLAG_CAP_WORDS | TEXT_FLAG_IME_MULTI_LINE | TEXT_FLAG_MULTI_LINE | TEXT_FLAG_NO_SUGGESTIONS | TEXT_VARIATION_EMAIL_ADDRESS | TEXT_VARIATION_EMAIL_SUBJECT | TEXT_VARIATION_FILTER | TEXT_VARIATION_LONG_MESSAGE | TEXT_VARIATION_NORMAL | TEXT_VARIATION_PASSWORD | TEXT_VARIATION_PERSON_NAME | TEXT_VARIATION_PHONETIC | TEXT_VARIATION_POSTAL_ADDRESS | TEXT_VARIATION_SHORT_MESSAGE | TEXT_VARIATION_URI | TEXT_VARIATION_VISIBLE_PASSWORD | TEXT_VARIATION_WEB_EDIT_TEXT | TEXT_VARIATION_WEB_EMAIL_ADDRESS | TEXT_VARIATION_WEB_PASSWORD",
+    "autoLinkMask":"ALL | EMAIL_ADDRESSES | MAP_ADDRESSES | PHONE_NUMBERS | WEB_URLS",
+    "marqueeRepeatLimit":"int",
+    "letterSpacing":"float",
+    "elegantTextHeight":"TRUE | FALSE",
+    "showSoftInputOnFocus":"TRUE | FALSE", 
+    "fontFeatureSettings":"string",
+    "compoundDrawableTintMode":"CLEAR | SRC | DST | SRC_OVER | DST_OVER | SRC_IN | DST_IN | SRC_OUT | DST_OUT | SRC_ATOP | DST_ATOP | XOR | DARKEN | LIGHTEN | MULTIPLY | SCREEN | ADD | OVERLAY",
+    "hyphenationFrequency":"NORMAL | FULL | NONE",
+    "breakStrategy":"BALANCED | SIMPLE | HIGH_QUALITY",
+    "fontVariationSettings":"string",
+    "autoSizeTextTypeWithDefaults":"UNIFORM | NONE",
+    "justificationMode":"INTER_WORD | NONE"
 }
 ```
+
+#### EditText
+
+Inherits everything from TextView.
 
 #### ImageView
 
@@ -382,15 +447,14 @@ Inherits everything from View.
   "class":"android.widget.ImageView",
   "attributes":{
     "src":"resource_url",
-    "cache":"true | false",
     "scaleType":"MATRIX | FIT_XY | FIT_START | FIT_CENTER | FIT_END | CENTER | CENTER_CROP | CENTER_INSIDE",
-    "adjustViewBounds":"true | false",
+    "adjustViewBounds":"TRUE | FALSE",
     "maxWidth":"units",
     "maxHeight":"units",
     "baseline":"units",
-    "baselineAlignBottom":"true | false",
-    "cropToPadding":"true | false",
-    "selected":"true | false",
+    "baselineAlignBottom":"TRUE | FALSE",
+    "cropToPadding":"TRUE | FALSE",
+    "selected":"TRUE | FALSE",
     "imageAlpha":"int",
     "imageLevel":"int",
     "colorFilter":"hex_value | color_name",
@@ -411,9 +475,10 @@ Inherits everything from Button.
 {  
   "class":"android.widget.CompoundButton",
   "attributes":{
-    "checked":"true | false ",
+    "checked":"TRUE | FALSE ",
     "buttonDrawable":"resource_url",
-    "onCheck":"event_listener"
+    "onCheck":"event_listener",
+    "buttonTintMode":"CLEAR | SRC | DST | SRC_OVER | DST_OVER | SRC_IN | DST_IN | SRC_OUT | DST_OUT | SRC_ATOP | DST_ATOP | XOR | DARKEN | LIGHTEN | MULTIPLY | SCREEN | ADD | OVERLAY"
   }
 }
 ``` 
@@ -441,8 +506,10 @@ Inherits everything from CompoundButton.
     "thumbTextPadding":"units",
     "thumbDrawable":"resource_url",
     "trackDrawable":"resource_url",
-    "showText":"true | false",
-    "splitTrack":"true | false"
+    "showText":"TRUE | FALSE",
+    "splitTrack":"TRUE | FALSE",
+    "thumbTintMode":"CLEAR | SRC | DST | SRC_OVER | DST_OVER | SRC_IN | DST_IN | SRC_OUT | DST_OUT | SRC_ATOP | DST_ATOP | XOR | DARKEN | LIGHTEN | MULTIPLY | SCREEN | ADD | OVERLAY",
+    "trackTintMode":"CLEAR | SRC | DST | SRC_OVER | DST_OVER | SRC_IN | DST_IN | SRC_OUT | DST_OUT | SRC_ATOP | DST_ATOP | XOR | DARKEN | LIGHTEN | MULTIPLY | SCREEN | ADD | OVERLAY"
   }
 }
 ``` 

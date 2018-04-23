@@ -121,6 +121,14 @@ class TextViewStyler extends ViewStyler {
             }
         }
 
+        if(attributes.has("ellipsize")) {
+            try {
+                textView.setEllipsize(TextUtils.TruncateAt.valueOf(attributes.getString("ellipsize")));
+            }catch(IllegalArgumentException e) {
+                Util.log("Style error", e.getMessage());
+            }
+        }
+
         if(attributes.has("allCaps")) {
             textView.setAllCaps(attributes.getBoolean("allCaps"));
         }
@@ -157,24 +165,8 @@ class TextViewStyler extends ViewStyler {
             textView.setSelected(attributes.getBoolean("selected"));
         }
 
-        if(attributes.has("singleLine")) {
-            textView.setSingleLine(attributes.getBoolean("singleLine"));
-        }
-
         if(attributes.has("textIsSelectable")) {
             textView.setTextIsSelectable(attributes.getBoolean("textIsSelectable"));
-        }
-
-        if(attributes.has("ellipsize")) {
-            try {
-                textView.setEllipsize(TextUtils.TruncateAt.valueOf(attributes.getString("ellipsize")));
-            }catch(IllegalArgumentException e) {
-                Util.log("Style error", e.getMessage());
-            }
-        }
-
-        if(attributes.has("includeFontPadding")) {
-            textView.setIncludeFontPadding(attributes.getBoolean("includeFontPadding"));
         }
 
         if(attributes.has("privateImeOptions")) {
@@ -560,10 +552,10 @@ class TextViewStyler extends ViewStyler {
             if(attributes.has("autoSizeTextTypeWithDefaults")) {
                 String auto = attributes.getString("autoSizeTextTypeWithDefaults");
 
-                if(auto.equalsIgnoreCase("none")) {
-                    textView.setAutoSizeTextTypeWithDefaults(TextView.AUTO_SIZE_TEXT_TYPE_NONE);
-                }else if(auto.equalsIgnoreCase("uniform")) {
+                if(auto.equalsIgnoreCase("uniform")) {
                     textView.setAutoSizeTextTypeWithDefaults(TextView.AUTO_SIZE_TEXT_TYPE_UNIFORM);
+                }else if(auto.equalsIgnoreCase("none")) {
+                    textView.setAutoSizeTextTypeWithDefaults(TextView.AUTO_SIZE_TEXT_TYPE_NONE);
                 }
             }
 
@@ -572,7 +564,7 @@ class TextViewStyler extends ViewStyler {
 
                 if(mode.equalsIgnoreCase("inter_word")) {
                     textView.setJustificationMode(Layout.JUSTIFICATION_MODE_INTER_WORD);
-                }else if(mode.equalsIgnoreCase("uniform")) {
+                }else if(mode.equalsIgnoreCase("none")) {
                     textView.setJustificationMode(Layout.JUSTIFICATION_MODE_NONE);
                 }
             }

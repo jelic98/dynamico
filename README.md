@@ -147,5 +147,6 @@ Attaches options to Dynamico object
 Starts layout fetching from cache/server depending on provided options
 
 ## TODO
+* Update MANUAL with shorter enum names
 * Support vector drawables
 * Support more views
