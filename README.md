@@ -1,7 +1,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![](https://jitpack.io/v/jelic98/dynamico.svg)](https://jitpack.io/#jelic98/dynamico)
 [![API](https://img.shields.io/badge/API-19%2B-orange.svg?style=flat)](https://android-arsenal.com/api?level=19)
-[![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-Dashbug-brightgreen.svg?style=flat)]( https://android-arsenal.com/details/1/6926)
+[![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-Dynamico-brightgreen.svg?style=flat)]( https://android-arsenal.com/details/1/6926)
 
 # Dynamico
 
