@@ -44,7 +44,7 @@ dependencies {
       "attributes":{  
         "layout_width":"wrap_content",
         "layout_height":"wrap_content",
-        "src":"http://ecloga.org/dynamico/logo.png",
+        "src":"http://ecloga.org/projects/dynamico/logo.png",
         "cache":true
       }
     },
@@ -80,7 +80,7 @@ dependencies {
 * layout = Wrapper layout that will contain loaded views
 
 ```java
-new Dynamico("http://ecloga.org/dynamico",
+new Dynamico("http://ecloga.org/projects/dynamico",
     "activity_main",
     findViewById(R.id.mainLayout))
     .initialize();
@@ -125,7 +125,7 @@ setOptions(NON_STOP) // use with setAsyncPause(long millis)
 One and only constructor
 
  * **Parameters:**
-   * `url` — URL of directory where JSON layout file is located (for example, "http://ecloga.org/dynamico")
+   * `url` — URL of directory where JSON layout file is located (for example, "http://ecloga.org/projects/dynamico")
    * `name` — JSON layout file name with or without extension (for example, "activity_main")
    * `layout` — wrapper layout that will contain inflated layout from JSON file (for example, findViewById(R.id.mainLayout))
  * **Exceptions:** `DynamicoException` — if any of passed parameters is null

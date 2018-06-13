@@ -15,7 +15,7 @@ public final class Dynamico {
 
     /**
      * One and only constructor
-     * @param url URL of directory where JSON layout file is located (for example, "http://ecloga.org/dynamico")
+     * @param url URL of directory where JSON layout file is located (for example, "http://ecloga.org/prjects/dynamico")
      * @param name JSON layout file name with or without extension (for example, "activity_main")
      * @param layout wrapper layout that will contain inflated layout from JSON file (for example, findViewById(R.id.mainLayout))
      * @throws DynamicoException if any of passed parameters is null
