@@ -8,6 +8,7 @@
 Android library for inflating dynamic layouts in runtime based on JSON configuration fetched from server. Useful in situations when layouts need to change without updating the app.
 
 ## Advanced features
+
 * Targeting specific devices by brand, model and Android API version
 * Layout changes based on configuration fields
 
@@ -86,7 +87,10 @@ new Dynamico("http://ecloga.org/projects/dynamico",
     .initialize();
 ```
 
-Done. For advanced usage, take a look at this awesome [manual](https://github.com/jelic98/dynamico/blob/master/MANUAL.md).
+
+## Manual
+
+For advanced usage, take a look at this awesome [manual](https://github.com/jelic98/dynamico/blob/master/MANUAL.md).
 
 ## Additional features
 
@@ -149,5 +153,6 @@ Attaches options to Dynamico object
 Starts layout fetching from cache/server depending on provided options
 
 ## TODO
+
 * Support vector drawables
 * Support more views
