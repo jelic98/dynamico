@@ -3,33 +3,58 @@ package org.ecloga.demo;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.Toast;
-import com.rengwuxian.materialedittext.MaterialEditText;
-import org.ecloga.dynamico.*;
+
+import org.ecloga.dynamico.Dynamico;
+import org.ecloga.dynamico.DynamicoException;
+import org.ecloga.dynamico.DynamicoListener;
 
 public class ActivityMain extends AppCompatActivity {
+
+    private static final String TAG = "MSG";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        StringBuilder sb = new StringBuilder("{\n" +
+                "  \"views\":[\n" +
+                "    {  \n" +
+                "      \"class\":\"android.widget.TextView\",\n" +
+                "      \"attributes\":{  \n" +
+                "        \"text\":\"Sample text\",\n" +
+                "        \"textColor\":\"#FF69B4\"\n" +
+                "      }\n" +
+                "    },\n" +
+                "    {  \n" +
+                "      \"class\":\"android.widget.ImageView\",\n" +
+                "      \"attributes\":{\n" +
+                "        \"src\": \"https://cdn69.picsart.com/186273671000202.jpg?r1024x1024\"\n" +
+                "      }\n" +
+                "    }\n" +
+                "  ]\n" +
+                "}");
+
         try {
-            new Dynamico("http://ecloga.org/projects/dynamico", "activity_main", (ViewGroup) findViewById(R.id.mainLayout))
+            //new Dynamico("http://ecloga.org/projects/dynamico", "activity_main", (ViewGroup) findViewById(R.id.mainLayout))
+            new Dynamico(sb, "activity_main", (ViewGroup) findViewById(R.id.mainLayout))
                     .setListener(new DynamicoListener() {
                         @Override
                         public void onSuccess(String message) {
                             // everything is okay
+                            Log.v(TAG, message);
                         }
 
                         @Override
                         public void onError(String message) {
                             // notify user
+                            Log.v(TAG, message);
                         }
                     })
-                    .setOptions(DynamicoOptions.Option.NON_STOP)
-                    .setAsyncPause(5000)
+                    .setAsyncPause(500000)
                     .initialize();
         }catch(DynamicoException e) {
             finish();

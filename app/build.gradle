@@ -30,9 +30,9 @@ buildscript {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:27.0.0'
-    compile 'com.android.support:design:27.0.0'
-    compile 'com.android.volley:volley:1.0.0'
-    compile 'com.squareup.okhttp3:okhttp:3.8.0'
-    compile group: 'commons-io', name: 'commons-io', version: '2.5'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.android.volley:volley:1.1.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation group: 'commons-io', name: 'commons-io', version: '2.5'
 }
