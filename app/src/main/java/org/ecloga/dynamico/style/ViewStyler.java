@@ -56,30 +56,6 @@ class ViewStyler implements Styler {
             }
         }
 
-        if(attributes.has("minWidth")) {
-            view.setMinimumWidth(Display.unitToPx(attributes.getString("minWidth"), context));
-        }
-
-        if(attributes.has("minHeight")) {
-            view.setMinimumHeight(Display.unitToPx(attributes.getString("minHeight"), context));
-        }
-
-        if(attributes.has("leftMargin")){
-            params.leftMargin = Display.unitToPx(attributes.getString("leftMargin"), context);
-        }
-
-        if(attributes.has("rightMargin")){
-            params.rightMargin = Display.unitToPx(attributes.getString("rightMargin"), context);
-        }
-
-        if(attributes.has("topMargin")){
-            params.topMargin = Display.unitToPx(attributes.getString("topMargin"), context);
-        }
-
-        if(attributes.has("bottomMargin")){
-            params.bottomMargin = Display.unitToPx(attributes.getString("bottomMargin"), context);
-        }
-
         if(attributes.has("layout_margin")) {
             int margin = Display.unitToPx(attributes.getString("layout_margin"), context);
 
