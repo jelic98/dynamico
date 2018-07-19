@@ -4,10 +4,8 @@ import android.graphics.Color;
 import android.util.Log;
 import android.content.Context;
 import android.net.ConnectivityManager;
-
 import java.math.BigInteger;
-import java.net.URI;
-import java.net.URISyntaxException;
+import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -32,10 +30,13 @@ public final class Util {
     }
 
     public static boolean isValidURL(String url) {
-        return url.contains("https")
-                || url.contains("http")
-                || url.contains("fpt")
-                || url.contains("file");
+        try {
+            new URL(url).toURI();
+        }catch(Exception e) {
+            return false;
+        }
+
+        return true;
     }
 
     public static boolean isValidColor(String url) {

@@ -19,40 +19,58 @@ import java.io.OutputStreamWriter;
 final class DynamicoLayoutLoader {
 
     private static final String TAG = "Dynamico.DynamicoLayoutLoader";
-    private StringBuilder json = null;
 
-    private String url, name;
+    private String res, name;
     private ViewGroup layout;
     private Context context;
-    private Boolean mUseCache = false;
     private DynamicoListener listener;
 
-    DynamicoLayoutLoader(String url, String name, ViewGroup layout) {
-        this.url = url;
+    DynamicoLayoutLoader(String res, String name, ViewGroup layout) {
+        this.res = res;
         this.name = name;
         this.layout = layout;
         this.context = layout.getContext();
-
-        if(!this.name.endsWith(".json")) {
-            this.name += ".json";
-        }
-    }
-
-    DynamicoLayoutLoader(StringBuilder json, String name, ViewGroup layout, Boolean useCache) {
-        this.url = null;
-        this.json = json;
-        this.name = name;
-        this.layout = layout;
-        this.context = layout.getContext();
-        this.mUseCache = useCache;
-
-        if(!this.name.endsWith(".json")) {
-            this.name += ".json";
-        }
     }
 
     public void setListener(DynamicoListener listener) {
         this.listener = listener;
+    }
+
+    public void loadLayoutFromCache() {
+        Util.log(TAG, "Loading from cache");
+
+        File file = new File(getStoragePath(name, context));
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+
+            StringBuilder content = new StringBuilder();
+            String line;
+
+            while((line = reader.readLine()) != null) {
+                content.append(line);
+            }
+
+            addViews(content.toString());
+
+            reader.close();
+        }catch(IOException e) {
+            Util.log("File error", "Loading layout from cache produced the following error: " + e.getMessage());
+
+            loadLayoutWithoutCache();
+
+            if(listener != null) {
+                listener.onError(e.getMessage());
+            }
+        }
+    }
+
+    public void loadLayoutWithoutCache() {
+        if(Util.isValidURL(res)) {
+            loadLayoutFromServer();
+        }else {
+            loadLayoutFromString();
+        }
     }
 
     public void loadLayoutFromServer() {
@@ -79,64 +97,16 @@ final class DynamicoLayoutLoader {
                 .start();
     }
 
-    public void loadLayoutFromCache() {
-        Util.log(TAG, "Loading from cache");
-
-        File file = new File(getStoragePath(name, context));
-
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
-
-            StringBuilder content = new StringBuilder();
-            String line;
-
-            while((line = reader.readLine()) != null) {
-                content.append(line);
-            }
-
-            addViews(content.toString());
-
-            reader.close();
-        }catch(IOException e) {
-            Util.log("File error", "Loading layout from cache produced the following error: " + e.getMessage());
-
-            loadLayoutFromServer();
-
-            if(listener != null) {
-                listener.onError(e.getMessage());
-            }
-        }
-    }
-
     public void loadLayoutFromString() {
         Util.log(TAG, "Loading from String");
 
-        File file = new File(getStoragePath(name, context));
-
         try {
-            //if the string is not a valid json obj it will throw a JSONException
-            JSONObject obj = new JSONObject(json.toString());
-
-            addViews(obj);
-
-            if(mUseCache) {
-                //if adding the view was successfull, write the content to a file so we can use the Cached content as fallback
-                //OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("config.txt", Context.MODE_PRIVATE));
-                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(name, Context.MODE_PRIVATE));
-                outputStreamWriter.write(json.toString(), 0, json.toString().length());
-                outputStreamWriter.flush(); //make sure all the data was written to the file
-                outputStreamWriter.close();
-            }
-
+            addViews(new JSONObject(res));
         }catch(JSONException e) {
             Util.log("File error", "Loading layout from String produced the following error: " + e.getMessage());
-            if(mUseCache)
-                loadLayoutFromCache();
-            if(listener != null) {
-                listener.onError(e.getMessage());
-            }
-        } catch (IOException e) {
-            Util.log("File error", "Loading layout from String produced the following error: " + e.getMessage());
+
+            loadLayoutFromServer();
+
             if(listener != null) {
                 listener.onError(e.getMessage());
             }
@@ -201,7 +171,7 @@ final class DynamicoLayoutLoader {
     }
 
     private String getDirectoryUrl(String name) {
-        return this.url + "/" + name;
+        return this.res + "/" + name;
     }
 
     private String getStoragePath(String name, Context context) {

@@ -15,11 +15,6 @@ public class DynamicoOptions {
         ONLY_CACHE,
 
         /**
-         * Fetch layout as a String from a DB for example.
-         */
-        ONLY_STRING,
-
-        /**
          * Fetch layout constantly
          * Note: Pause between server requests is 30 seconds or use setAsyncPause(long millis)
          */

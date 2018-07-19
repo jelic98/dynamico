@@ -29,8 +29,8 @@ buildscript {
 }
 
 dependencies {
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support:design:27.1.1'
-    implementation 'com.rengwuxian.materialedittext:library:2.1.4'
-    implementation project(':app')
+    compile 'com.android.support:appcompat-v7:27.0.0'
+    compile 'com.android.support:design:27.0.0'
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'
+    compile project(':app')
 }

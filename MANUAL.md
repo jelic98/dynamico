@@ -69,7 +69,7 @@
     {  
       "class":"android.widget.ImageView",
       "attributes":{
-        "src": "http://ecloga.org/projects/dynamico/logo.png"
+        "src": "https://ecloga.org/projects/dynamico/logo.png"
       }
     }
   ]
@@ -164,7 +164,7 @@
 {  
   "class":"android.widget.ImageView",
   "attributes":{  
-    "src":"http://ecloga.org/projects/dynamico/logo.png",
+    "src":"https://ecloga.org/projects/dynamico/logo.png",
     "clickable":"true",
     "onClick":{
       "class":"org.ecloga.demo.ActivityMain",

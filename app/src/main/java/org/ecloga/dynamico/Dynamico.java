@@ -14,53 +14,19 @@ public final class Dynamico {
     private DynamicoOptions options;
 
     /**
-     * Basic Constructor
-     * @param url URL of directory where JSON layout file is located (for example, "http://ecloga.org/prjects/dynamico")
+     * Basic constructor (Not using cache)
+     * @param res URL of directory where JSON layout file is located (for example, "https://ecloga.org/prjects/dynamico") or JSON layout as a String
      * @param name JSON layout file name with or without extension (for example, "activity_main")
      * @param layout wrapper layout that will contain inflated layout from JSON file (for example, findViewById(R.id.mainLayout))
      * @throws DynamicoException if any of passed parameters is null
      */
-    public Dynamico(String url, String name, ViewGroup layout) throws DynamicoException {
-        if(url == null || name == null || layout == null) {
+    public Dynamico(String res, String name, ViewGroup layout) throws DynamicoException {
+        if(res == null || name == null || layout == null) {
             throw new DynamicoException("Parameters cannot be null");
         }
 
-        this.loader = new DynamicoLayoutLoader(url, name, layout);
+        this.loader = new DynamicoLayoutLoader(res, name, layout);
         this.options = new DynamicoOptions();
-    }
-
-    /**
-     * By default, you can disable the cached version as a file by setting useCache to FALSE.
-     * @param json String of JSON layout (for example, obtained from DB)
-     * @param name JSON layout file name with or without extension (for example, "activity_main")
-     * @param layout wrapper layout that will contain inflated layout from JSON file (for example, findViewById(R.id.mainLayout))
-     * @param useCache indicate if the obtained String should be stored as a file on the device
-     * @throws DynamicoException if any of passed parameters is null
-     */
-    public Dynamico(StringBuilder json, String name, ViewGroup layout, Boolean useCache) throws DynamicoException {
-        if(json == null || name == null || layout == null || useCache == null) {
-            throw new DynamicoException("Parameters cannot be null");
-        }
-
-        this.loader = new DynamicoLayoutLoader(json, name, layout, useCache);
-        this.options = new DynamicoOptions(DynamicoOptions.Option.ONLY_STRING);
-    }
-
-    /**
-     * By default, this Constructor stores the obtained JSON String as a File for further use as Cache.
-     * @param json String of JSON layout (for example, obtained from DB)
-     * @param name JSON layout file name with or without extension (for example, "activity_main")
-     * @param layout wrapper layout that will contain inflated layout from JSON file (for example, findViewById(R.id.mainLayout))
-     * @throws DynamicoException if any of passed parameters is null
-     *
-     */
-    public Dynamico(StringBuilder json, String name, ViewGroup layout) throws DynamicoException {
-        if(json == null || name == null || layout == null) {
-            throw new DynamicoException("Parameters cannot be null");
-        }
-
-        this.loader = new DynamicoLayoutLoader(json, name, layout, true);
-        this.options = new DynamicoOptions(DynamicoOptions.Option.ONLY_STRING);
     }
 
     /**
@@ -114,11 +80,7 @@ public final class Dynamico {
                 if(options.isEnabled(DynamicoOptions.Option.ONLY_CACHE)) {
                     loader.loadLayoutFromCache();
                 }else {
-                    if(options.isEnabled(DynamicoOptions.Option.ONLY_STRING)){
-                        loader.loadLayoutFromString();
-                    }else {
-                        loader.loadLayoutFromServer();
-                    }
+                    loader.loadLayoutWithoutCache();
                 }
 
                 if(!options.isEnabled(DynamicoOptions.Option.NON_STOP)) {
