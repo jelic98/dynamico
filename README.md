@@ -45,7 +45,7 @@ dependencies {
       "attributes":{  
         "layout_width":"wrap_content",
         "layout_height":"wrap_content",
-        "src":"https://ecloga.org/projects/dynamico/logo.png",
+        "src":"https://lazarjelic.com/ecloga/projects/dynamico/logo.png",
         "cache":true
       }
     },

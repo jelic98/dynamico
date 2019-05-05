@@ -69,7 +69,7 @@
     {  
       "class":"android.widget.ImageView",
       "attributes":{
-        "src": "https://ecloga.org/projects/dynamico/logo.png"
+        "src": "https://lazarjelic.com/ecloga/projects/dynamico/logo.png"
       }
     }
   ]
