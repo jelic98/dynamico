@@ -97,6 +97,33 @@ final class DynamicoLayoutLoader {
                 .start();
     }
 
+    public void loadLayoutFromLocalStorage() {
+        Util.log(TAG, "Loading from Local storage");
+
+        File file = new File(getStoragePath(name, context));
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+
+            StringBuilder content = new StringBuilder();
+            String line;
+
+            while((line = reader.readLine()) != null) {
+                content.append(line);
+            }
+
+            addViews(content.toString());
+
+            reader.close();
+        }catch(IOException e) {
+            Util.log("File error", "Loading layout from cache produced the following error: " + e.getMessage());
+
+            if(listener != null) {
+                listener.onError(e.getMessage());
+            }
+        }
+    }
+
     public void loadLayoutFromString() {
         Util.log(TAG, "Loading from String");
 
