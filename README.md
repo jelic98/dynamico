@@ -128,7 +128,7 @@ setOptions(NON_STOP) // use with setAsyncPause(long millis)
 One and only constructor
 
  * **Parameters:**
-   * `url` — URL of directory where JSON layout file is located (for example, "https://ecloga.org/projects/dynamico")
+   * `url` — URL of directory where JSON layout file is located (for example, "https://lazarjelic.com/ecloga/projects/dynamico")
    * `name` — JSON layout file name with or without extension (for example, "activity_main")
    * `layout` — wrapper layout that will contain inflated layout from JSON file (for example, findViewById(R.id.mainLayout))
  * **Exceptions:** `DynamicoException` — if any of passed parameters is null
