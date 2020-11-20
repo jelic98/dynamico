@@ -19,7 +19,6 @@ Android library for inflating dynamic layouts in runtime based on JSON configura
 ```gradle
 allprojects {
     repositories {
-        ...
         maven { url 'https://jitpack.io' }
     }
 }
@@ -81,7 +80,7 @@ dependencies {
 * layout = Wrapper layout that will contain loaded views
 
 ```java
-new Dynamico("https://ecloga.org/projects/dynamico",
+new Dynamico("https://lazarjelic.com/ecloga/projects/dynamico",
     "activity_main",
     findViewById(R.id.mainLayout))
     .initialize();
